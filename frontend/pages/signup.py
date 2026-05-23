@@ -2,9 +2,11 @@ import requests
 import streamlit as st
 
 try:
-    from frontend.auth_api import signup_user
+    from frontend.auth_api import login_user, signup_user
+    from frontend.auth_storage import persist_auth_to_cookie
 except ModuleNotFoundError:
-    from auth_api import signup_user
+    from auth_api import login_user, signup_user
+    from auth_storage import persist_auth_to_cookie
 
 
 st.set_page_config(
@@ -305,9 +307,7 @@ with right:
         else:
             try:
                 result = signup_user(normalized_email, password)
-                st.success(result.get("message", "Account created successfully."))
-                st.info("You can log in now.")
-                st.switch_page("pages/login.py")
+                login_data = login_user(normalized_email, password)
             except requests.HTTPError as exc:
                 message = "Signup failed."
                 if exc.response is not None:
@@ -315,9 +315,25 @@ with right:
                         message = exc.response.json().get("detail", message)
                     except Exception:
                         pass
-                st.error(message)
-            except Exception as exc:
+                if "already registered" in message.lower():
+                    st.session_state.login_email = normalized_email
+                    st.switch_page("pages/login.py")
+                else:
+                    st.error(message)
+            except requests.RequestException as exc:
                 st.error(f"Could not reach the backend: {exc}")
+            else:
+                st.session_state.auth_token = login_data.get("access_token")
+                st.session_state.user_email = login_data.get("user_email", normalized_email)
+
+                if st.session_state.auth_token and st.session_state.user_email:
+                    try:
+                        persist_auth_to_cookie(st.session_state.auth_token, st.session_state.user_email)
+                    except Exception:
+                        pass
+
+                st.success(result.get("message", "Account created successfully."))
+                st.switch_page("streamlit_app.py")
 
     st.markdown('<div class="switch-link">Already have an account?</div>', unsafe_allow_html=True)
     if st.button("Log in", use_container_width=True):

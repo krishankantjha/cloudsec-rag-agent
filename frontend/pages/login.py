@@ -243,6 +243,9 @@ inject_css()
 if st.session_state.get("auth_token"):
     st.switch_page("streamlit_app.py")
 
+if st.session_state.get("login_email") and "login_email_input" not in st.session_state:
+    st.session_state.login_email_input = st.session_state.login_email
+
 left, right = st.columns([1.1, 0.9], gap="large")
 
 with left:
@@ -277,7 +280,7 @@ with right:
     )
 
     with st.form("login_form", clear_on_submit=False):
-      email = st.text_input("Email", placeholder="you@example.com", key="login_email")
+      email = st.text_input("Email", placeholder="you@example.com", key="login_email_input")
       password = st.text_input(
         "Password",
         type="password",
