@@ -77,7 +77,7 @@ def get_settings() -> dict[str, object]:
         "gemini_api_key": os.getenv("GEMINI_API_KEY", "").strip(),
         "gemini_base_url": os.getenv("GEMINI_BASE_URL", "https://generativelanguage.googleapis.com/v1beta").rstrip("/"),
         "gemini_model": os.getenv("GEMINI_MODEL", "gemini-2.5-flash"),
-        "gemini_max_output_tokens": _get_int_env("GEMINI_MAX_OUTPUT_TOKENS", 400, minimum=1, maximum=8192),
+        "gemini_max_output_tokens": _get_int_env("GEMINI_MAX_OUTPUT_TOKENS", 800, minimum=1, maximum=8192),
         "ollama_url": os.getenv("OLLAMA_URL", "").strip(),
         "ollama_model": os.getenv("OLLAMA_MODEL", "phi3:mini"),
         "ollama_num_predict": _get_int_env("OLLAMA_NUM_PREDICT", 192, minimum=1, maximum=8192),

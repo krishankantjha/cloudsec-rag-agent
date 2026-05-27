@@ -341,11 +341,11 @@ def build_payload(f):
                "text_preview": text[:TEXT_PREVIEW_CHARS] if text else None}
     return payload, preview
 
-def submit_request(query, attachments):
+def submit_request(query, attachments, history=None):
     token = st.session_state.get("auth_token")
     if not token:
         raise RuntimeError("Missing authentication token.")
-    return ask_agent(query, attachments, token=token, timeout=180)
+    return ask_agent(query, attachments, token=token, timeout=180, history=history or [])
 
 
 def get_active_chat():
@@ -366,6 +366,15 @@ def refresh_chat_meta(chat):
                 title = msg["content"].strip().replace("\n", " ")
                 chat["title"] = title[:36] + ("..." if len(title) > 36 else "")
                 break
+
+
+def build_chat_history(chat, max_turns=8):
+    history = []
+    for msg in chat["messages"][-max_turns:]:
+        content = (msg.get("content") or "").strip()
+        if msg.get("role") in {"user", "assistant"} and content:
+            history.append({"role": msg["role"], "content": content})
+    return history
 
 
 def create_new_chat():
@@ -584,6 +593,7 @@ user_input    = st.chat_input("Message CloudSec Agent…")
 should_submit = bool(user_input) or bool(quick_prompt) or (bool(send_files) and bool(uploaded_files))
 
 if should_submit:
+    request_history = build_chat_history(active_chat)
     payloads, previews = [], []
     for f in (uploaded_files or []):
         p, v = build_payload(f)
@@ -602,7 +612,7 @@ if should_submit:
     with st.chat_message("assistant", avatar="🤖"):
         with st.spinner("Thinking…"):
             try:
-                data   = submit_request(query, payloads)
+                data   = submit_request(query, payloads, request_history)
                 answer = data.get("answer") or f"Error: {data.get('error', 'Unknown error')}"
             except requests.HTTPError as exc:
                 if exc.response is not None and exc.response.status_code == 401:

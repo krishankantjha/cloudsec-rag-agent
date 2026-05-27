@@ -54,6 +54,13 @@ class AttachmentRequest(BaseModel):
     )
 
 
+class ChatHistoryMessage(BaseModel):
+    model_config = ConfigDict(str_strip_whitespace=True)
+
+    role: str = Field(..., pattern="^(user|assistant)$")
+    content: str = Field(..., min_length=1, max_length=4000)
+
+
 class QueryRequest(BaseModel):
     model_config = ConfigDict(str_strip_whitespace=True)
 
@@ -62,6 +69,7 @@ class QueryRequest(BaseModel):
         default=None,
         max_length=int(settings["max_attachment_count"]),
     )
+    history: Optional[List[ChatHistoryMessage]] = Field(default=None, max_length=12)
 
 
 class SignupRequest(BaseModel):
@@ -180,6 +188,7 @@ def ask_agent(request: QueryRequest, _: User = Depends(get_current_user)):
         response = run_agent(
             request.query,
             [attachment.model_dump() for attachment in (request.attachments or [])],
+            history=[message.model_dump() for message in (request.history or [])],
         )
         return {"answer": response}
     except HTTPException:

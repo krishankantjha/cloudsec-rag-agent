@@ -247,7 +247,7 @@ Open the Streamlit URL, create an account, log in, and start using the chat work
 | `GEMINI_API_KEY` | Empty | API key for Gemini API calls. |
 | `GEMINI_MODEL` | `gemini-2.5-flash` | Gemini model used by the backend. |
 | `GEMINI_BASE_URL` | `https://generativelanguage.googleapis.com/v1beta` | Base URL for Gemini API calls. |
-| `GEMINI_MAX_OUTPUT_TOKENS` | `400` | Maximum Gemini output tokens. |
+| `GEMINI_MAX_OUTPUT_TOKENS` | `800` | Maximum Gemini output tokens. |
 | `OPENAI_API_KEY` | Empty | Optional API key for OpenAI Responses API calls when `LLM_PROVIDER=openai`. |
 | `OPENAI_MODEL` | `gpt-4.1-mini` | Optional OpenAI model used when `LLM_PROVIDER=openai`. |
 | `OPENAI_BASE_URL` | `https://api.openai.com/v1` | Base URL for OpenAI-compatible Responses API. |

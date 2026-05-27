@@ -48,10 +48,16 @@ def login_user(email: str, password: str) -> Dict[str, Any]:
     return response.json()
 
 
-def ask_agent(query: str, attachments: list[dict], token: str, timeout: int = 180) -> Dict[str, Any]:
+def ask_agent(
+    query: str,
+    attachments: list[dict],
+    token: str,
+    timeout: int = 180,
+    history: list[dict] | None = None,
+) -> Dict[str, Any]:
     response = requests.post(
         f"{API_BASE_URL}/ask",
-        json={"query": query, "attachments": attachments},
+        json={"query": query, "attachments": attachments, "history": history or []},
         headers={"Authorization": f"Bearer {token}"},
         timeout=timeout,
     )
