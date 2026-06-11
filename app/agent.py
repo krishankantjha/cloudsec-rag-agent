@@ -233,7 +233,11 @@ def _extract_gemini_text(payload: dict) -> str:
 
 def _model_unavailable(reason: str, fallback_message: str) -> str:
     logger.warning("Model fallback triggered: %s", reason)
-    return fallback_message or SCOPE_FALLBACK_MESSAGE
+    visible_reason = reason.rstrip(".")
+    message = f"Model response unavailable: {visible_reason}."
+    if fallback_message:
+        return f"{message}\n\n{fallback_message}"
+    return f"{message}\n\n{SCOPE_FALLBACK_MESSAGE}"
 
 
 def generate_with_gemini(prompt: str, fallback_message: str) -> str:
@@ -275,6 +279,9 @@ def generate_with_gemini(prompt: str, fallback_message: str) -> str:
         if not output_text:
             logger.warning("Gemini response did not include output text: response=%s", response.text[:1000])
         return output_text or _model_unavailable("The API returned no output text.", fallback_message)
+    except ValueError as exc:
+        logger.warning("Gemini response was not valid JSON: %s", exc, exc_info=True)
+        return _model_unavailable("The API returned an invalid JSON response.", fallback_message)
     except requests.RequestException as exc:
         logger.warning("Gemini request error: %s", exc, exc_info=True)
         return _model_unavailable("The API request failed.", fallback_message)
@@ -313,6 +320,9 @@ def generate_with_openai(prompt: str, fallback_message: str) -> str:
         if not output_text:
             logger.warning("OpenAI response did not include output text: response=%s", response.text[:1000])
         return output_text or _model_unavailable("The API returned no output text.", fallback_message)
+    except ValueError as exc:
+        logger.warning("OpenAI response was not valid JSON: %s", exc, exc_info=True)
+        return _model_unavailable("The API returned an invalid JSON response.", fallback_message)
     except requests.RequestException as exc:
         logger.warning("OpenAI request error: %s", exc, exc_info=True)
         return _model_unavailable("The API request failed.", fallback_message)
