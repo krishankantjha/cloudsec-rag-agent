@@ -295,7 +295,8 @@ with right:
             st.error("Enter both email and password.")
         else:
             try:
-                data = login_user(email.strip().lower(), password)
+                with st.spinner("Connecting to the backend..."):
+                    data = login_user(email.strip().lower(), password)
             except requests.HTTPError as exc:
                 message = "Login failed."
                 if exc.response is not None:

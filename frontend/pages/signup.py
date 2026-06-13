@@ -306,8 +306,9 @@ with right:
             st.error("Passwords do not match.")
         else:
             try:
-                result = signup_user(normalized_email, password)
-                login_data = login_user(normalized_email, password)
+                with st.spinner("Connecting to the backend..."):
+                    result = signup_user(normalized_email, password)
+                    login_data = login_user(normalized_email, password)
             except requests.HTTPError as exc:
                 message = "Signup failed."
                 if exc.response is not None:
