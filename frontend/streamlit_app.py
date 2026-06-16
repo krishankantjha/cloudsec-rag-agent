@@ -58,9 +58,9 @@ def inject_css():
   --surface:       #0f141e;
   --surface-hover: #161e2b;
   --surface-input: #1a2333;
-  --border:        rgba(255, 255, 255, 0.06);
+  --border:        rgba(6, 182, 212, 0.08);
   --border-glow:   rgba(6, 182, 212, 0.3);
-  --text:          #94a3b8;
+  --text:          #e2e8f0;
   --text-strong:   #f8fafc;
   --accent:        #06b6d4;
   --accent-soft:   #22d3ee;
@@ -69,6 +69,7 @@ def inject_css():
   --warning:       #f59e0b;
   --critical:      #ef4444;
   --radius:        12px;
+  --shadow:        0 4px 12px rgba(0, 0, 0, 0.25), 0 1px 2px rgba(0, 0, 0, 0.15);
 }
 
 * { box-sizing: border-box; }
@@ -118,7 +119,10 @@ footer {
   width: 32px;
   height: 32px;
   border-radius: 8px;
-  background: rgba(37, 99, 235, 0.1);
+  background: var(--accent-glow) !important;
+}
+.brand-logo svg {
+  stroke: var(--accent) !important;
 }
 .brand-text {
   display: flex;
@@ -133,7 +137,7 @@ footer {
 }
 .brand-subtitle {
   font-size: 0.7rem;
-  color: #64748b !important;
+  color: #cbd5e1 !important;
   font-weight: 500;
 }
 
@@ -142,18 +146,19 @@ footer {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.85rem;
+  padding: 1rem;
   border-radius: var(--radius);
   background: #0f141e;
   border: 1px solid var(--border);
+  box-shadow: var(--shadow);
   margin-bottom: 1.5rem;
 }
 .user-avatar-circle {
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  background: #6366f1; /* Purple/Blue circle */
-  color: white !important;
+  background: var(--accent) !important;
+  color: #080b11 !important;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -172,7 +177,7 @@ footer {
 }
 .user-email {
   font-size: 0.75rem;
-  color: #64748b !important;
+  color: #cbd5e1 !important;
   margin-bottom: 0.15rem;
 }
 .user-status {
@@ -195,7 +200,7 @@ footer {
 .nav-heading {
   font-size: 0.68rem;
   font-weight: 600;
-  color: #64748b !important;
+  color: #cbd5e1 !important;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   margin-top: 1.25rem;
@@ -210,7 +215,7 @@ footer {
   border-radius: 8px;
   font-size: 0.88rem;
   font-weight: 500;
-  color: #94a3b8 !important;
+  color: #cbd5e1 !important;
   transition: all 0.15s;
   margin-bottom: 0.15rem;
 }
@@ -219,8 +224,8 @@ footer {
   background: rgba(255, 255, 255, 0.02) !important;
 }
 .nav-item.active {
-  color: #3b82f6 !important;
-  background: rgba(59, 130, 246, 0.08) !important;
+  color: var(--accent) !important;
+  background: var(--accent-glow) !important;
   font-weight: 600;
 }
 .nav-icon {
@@ -233,8 +238,9 @@ button[data-testid="baseButton-secondary"],
 button[data-testid="baseButton-primary"] {
   background-color: #0f141e !important;
   color: #f8fafc !important;
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid var(--border) !important;
   border-radius: 8px !important;
+  font-family: 'Inter', sans-serif !important;
   font-size: 0.88rem !important;
   font-weight: 500 !important;
   transition: all 0.2s !important;
@@ -243,8 +249,8 @@ button[data-testid="baseButton-primary"] {
 div.stButton > button:hover,
 button[data-testid="baseButton-secondary"]:hover {
   background-color: #161e2b !important;
-  border-color: #3b82f6 !important;
-  color: #3b82f6 !important;
+  border-color: var(--accent) !important;
+  color: var(--accent) !important;
 }
 
 /* Logout button specific styling */
@@ -277,7 +283,8 @@ div.logout-btn-wrapper button[data-testid="baseButton-secondary"]:hover {
   background: #0f141e;
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 0.85rem;
+  padding: 1rem;
+  box-shadow: var(--shadow);
   margin-top: 0.5rem;
 }
 .ai-model-header {
@@ -290,7 +297,7 @@ div.logout-btn-wrapper button[data-testid="baseButton-secondary"]:hover {
   margin-bottom: 0.25rem;
 }
 .ai-model-sparkle {
-  color: #818cf8 !important;
+  color: var(--accent) !important;
 }
 .ai-model-status {
   display: flex;
@@ -323,7 +330,7 @@ div.logout-btn-wrapper button[data-testid="baseButton-secondary"]:hover {
 }
 .welcome-subtitle {
   font-size: 0.88rem !important;
-  color: #64748b !important;
+  color: #cbd5e1 !important;
   margin-top: 0.2rem !important;
 }
 .system-badge {
@@ -366,19 +373,19 @@ div.logout-btn-wrapper button[data-testid="baseButton-secondary"]:hover {
   display: flex;
   align-items: center;
   gap: 0.85rem;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  box-shadow: var(--shadow);
   transition: all 0.2s;
 }
-.stat-card-blue { border-left: 3px solid #3b82f6; }
+.stat-card-blue { border-left: 3px solid var(--accent); }
 .stat-card-green { border-left: 3px solid #10b981; }
 .stat-card-orange { border-left: 3px solid #f59e0b; }
 .stat-card-red { border-left: 3px solid #ef4444; }
 
 .stat-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow), 0 8px 24px rgba(0, 0, 0, 0.3);
 }
-.stat-card-blue:hover { border-color: rgba(59, 130, 246, 0.5); }
+.stat-card-blue:hover { border-color: var(--accent); }
 .stat-card-green:hover { border-color: rgba(16, 185, 129, 0.5); }
 .stat-card-orange:hover { border-color: rgba(245, 158, 11, 0.5); }
 .stat-card-red:hover { border-color: rgba(239, 68, 68, 0.5); }
@@ -392,7 +399,8 @@ div.logout-btn-wrapper button[data-testid="baseButton-secondary"]:hover {
   border-radius: 10px;
   flex-shrink: 0;
 }
-.stat-icon-blue { background: rgba(59, 130, 246, 0.1); }
+.stat-icon-blue { background: var(--accent-glow); }
+.stat-icon-blue svg { stroke: var(--accent) !important; }
 .stat-icon-green { background: rgba(16, 185, 129, 0.1); }
 .stat-icon-orange { background: rgba(245, 158, 11, 0.1); }
 .stat-icon-red { background: rgba(239, 68, 68, 0.1); }
@@ -403,7 +411,7 @@ div.logout-btn-wrapper button[data-testid="baseButton-secondary"]:hover {
 }
 .stat-title {
   font-size: 0.75rem;
-  color: #94a3b8;
+  color: #cbd5e1;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.02em;
@@ -417,7 +425,7 @@ div.logout-btn-wrapper button[data-testid="baseButton-secondary"]:hover {
 }
 .stat-desc {
   font-size: 0.68rem;
-  color: #64748b;
+  color: #cbd5e1;
 }
 
 /* File Uploader styling */
@@ -430,10 +438,10 @@ div.logout-btn-wrapper button[data-testid="baseButton-secondary"]:hover {
 [data-testid="stFileUploaderDropzone"] {
   border: 1px dashed rgba(255, 255, 255, 0.1) !important;
   background: rgba(15, 20, 30, 0.4) !important;
-  border-radius: 10px !important;
+  border-radius: var(--radius) !important;
 }
 [data-testid="stFileUploaderDropzone"]:hover {
-  border-color: #3b82f6 !important;
+  border-color: var(--accent) !important;
 }
 [data-testid="stFileUploaderDropzone"] button {
   background: #1e293b !important;
@@ -443,7 +451,7 @@ div.logout-btn-wrapper button[data-testid="baseButton-secondary"]:hover {
 }
 [data-testid="stFileUploaderDropzone"] button:hover {
   background: #334155 !important;
-  border-color: #3b82f6 !important;
+  border-color: var(--accent) !important;
   color: #f8fafc !important;
 }
 
@@ -452,29 +460,37 @@ textarea,
 div[data-baseweb="textarea"] {
   background-color: #0f141e !important;
   color: #f8fafc !important;
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
-  border-radius: 8px !important;
+  -webkit-text-fill-color: #f8fafc !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius) !important;
+  box-shadow: var(--shadow);
 }
 div[data-baseweb="textarea"] textarea {
   color: #f8fafc !important;
+  -webkit-text-fill-color: #f8fafc !important;
   background-color: transparent !important;
 }
 div[data-baseweb="textarea"]:focus-within {
-  border-color: #3b82f6 !important;
+  border-color: var(--accent) !important;
+}
+textarea::placeholder {
+  color: #94a3b8 !important;
+  -webkit-text-fill-color: #94a3b8 !important;
+  opacity: 1 !important;
 }
 
 /* Upload & Analyze action button */
 div.upload-btn-container button,
 div.upload-btn-container button[data-testid="baseButton-secondary"],
 div.upload-btn-container button[data-testid="baseButton-primary"] {
-  background-color: #2563eb !important;
-  color: white !important;
+  background-color: var(--accent) !important;
+  color: #080b11 !important;
   border: none !important;
   border-radius: 8px !important;
   font-weight: 600 !important;
   width: 100% !important;
   padding: 0.6rem 1rem !important;
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2) !important;
+  box-shadow: 0 4px 12px rgba(6, 182, 212, 0.2) !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -483,9 +499,9 @@ div.upload-btn-container button[data-testid="baseButton-primary"] {
 }
 div.upload-btn-container button:hover,
 div.upload-btn-container button[data-testid="baseButton-primary"]:hover {
-  background-color: #1d4ed8 !important;
-  color: white !important;
-  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.4) !important;
+  background-color: var(--accent-soft) !important;
+  color: #080b11 !important;
+  box-shadow: 0 4px 16px rgba(6, 182, 212, 0.4) !important;
 }
 
 /* Staged / Uploaded files card list */
@@ -499,7 +515,7 @@ div.upload-btn-container button[data-testid="baseButton-primary"]:hover {
 .uploaded-file-card {
   background: #0f141e;
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: var(--radius) !important;
   padding: 0.5rem 0.75rem;
   display: flex;
   align-items: center;
@@ -521,7 +537,7 @@ div.upload-btn-container button[data-testid="baseButton-primary"]:hover {
 }
 .uploaded-file-size {
   font-size: 0.75rem;
-  color: #64748b;
+  color: #cbd5e1;
   margin-right: 0.5rem;
 }
 
@@ -529,7 +545,7 @@ div.upload-btn-container button[data-testid="baseButton-primary"]:hover {
 .remove-file-btn button {
   background: transparent !important;
   border: none !important;
-  color: #64748b !important;
+  color: #cbd5e1 !important;
   font-size: 0.8rem !important;
   padding: 0 !important;
   width: auto !important;
@@ -565,7 +581,7 @@ div.clear-btn-wrapper button[data-testid="baseButton-secondary"] {
   height: auto !important;
   line-height: normal !important;
   display: inline-flex !important;
-  align-items: center !important;
+  align-items: center;
 }
 div.clear-btn-wrapper button:hover,
 div.clear-btn-wrapper button[data-testid="baseButton-secondary"]:hover {
@@ -578,23 +594,26 @@ div.clear-btn-wrapper button[data-testid="baseButton-secondary"]:hover {
 .welcome-chat-card {
   background: #0f141e;
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: var(--radius);
   padding: 1.25rem;
   display: flex;
   gap: 0.85rem;
   margin-bottom: 1.5rem;
   max-width: 85%;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  box-shadow: var(--shadow);
 }
 .chat-avatar-left {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: rgba(59, 130, 246, 0.1);
+  background: var(--accent-glow) !important;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+}
+.chat-avatar-left svg {
+  stroke: var(--accent) !important;
 }
 .welcome-chat-content {
   display: flex;
@@ -625,7 +644,7 @@ div.clear-btn-wrapper button[data-testid="baseButton-secondary"]:hover {
 }
 .welcome-chat-timestamp {
   font-size: 0.68rem;
-  color: #64748b;
+  color: #cbd5e1;
   margin-top: 0.6rem;
   font-family: 'JetBrains Mono', monospace;
 }
@@ -633,23 +652,49 @@ div.clear-btn-wrapper button[data-testid="baseButton-secondary"]:hover {
 /* Chat Input Styling */
 div[data-testid="stChatInput"] {
   background-color: #0f141e !important;
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
-  border-radius: 8px !important;
-  padding: 4px !important;
+  border: 1px solid rgba(6, 182, 212, 0.15) !important;
+  border-radius: 12px !important;
+  padding: 8px 12px !important;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+div[data-testid="stChatInput"]:hover {
+  border-color: rgba(6, 182, 212, 0.35) !important;
+  background-color: #121824 !important;
+}
+div[data-testid="stChatInput"]:focus-within {
+  border-color: var(--accent) !important;
+  background-color: #121824 !important;
+  box-shadow: 0 0 0 1px rgba(6, 182, 212, 0.2), 0 8px 24px -4px rgba(0, 0, 0, 0.5) !important;
+}
+div[data-testid="stChatInput"] div {
+  background-color: transparent !important;
+  border: none !important;
 }
 div[data-testid="stChatInput"] textarea {
   color: #f8fafc !important; /* Ensure input text is bright and visible */
+  -webkit-text-fill-color: #f8fafc !important; /* Force text color override in Webkit browsers */
   background-color: transparent !important;
+  font-family: 'Inter', sans-serif !important;
   font-size: 0.92rem !important;
-  caret-color: #06b6d4 !important; /* Cyan cursor */
+  line-height: 1.5 !important;
+  caret-color: var(--accent) !important; /* Cyan cursor */
+  opacity: 1 !important;
+  padding: 4px 0 !important;
 }
 div[data-testid="stChatInput"] textarea::placeholder {
-  color: #64748b !important; /* Clear placeholder */
+  color: #94a3b8 !important; /* Clear placeholder, distinguishable from typed text */
+  -webkit-text-fill-color: #94a3b8 !important;
+  opacity: 0.85 !important;
 }
 div[data-testid="stChatInput"] button {
-  background-color: #2563eb !important;
-  color: white !important;
-  border-radius: 6px !important;
+  background-color: var(--accent) !important;
+  color: #080b11 !important;
+  border-radius: 8px !important;
+  transition: all 0.2s ease !important;
+}
+div[data-testid="stChatInput"] button:hover {
+  background-color: var(--accent-soft) !important;
+  transform: scale(1.05) !important;
 }
 .stChatInputContainer {
   background-color: #080b11 !important;
@@ -667,12 +712,14 @@ div[data-testid="stChatInput"] button {
   padding: 0.95rem 1.1rem !important;
   border: 1px solid var(--border) !important;
   max-width: 85% !important;
+  box-shadow: var(--shadow);
 }
 [data-testid="stChatMessageContent"] p,
 [data-testid="stChatMessageContent"] li,
 [data-testid="stChatMessageContent"] span {
   font-size: 0.92rem !important;
   line-height: 1.6;
+  color: inherit !important;
 }
 /* User bubbles */
 [data-testid="stChatMessageUser"] {
@@ -680,15 +727,15 @@ div[data-testid="stChatInput"] button {
   text-align: right !important;
 }
 [data-testid="stChatMessageUser"] [data-testid="stChatMessageContent"] {
-  background: #2563eb !important;
-  border: none !important;
+  background: var(--surface-hover) !important;
+  border: 1px solid var(--border) !important;
   border-radius: 12px 12px 0 12px !important;
-  color: white !important;
+  color: var(--text-strong) !important;
   text-align: left !important;
   display: inline-block !important;
 }
 [data-testid="stChatMessageUser"] [data-testid="stChatMessageContent"] * {
-  color: white !important;
+  color: var(--text-strong) !important;
 }
 /* Assistant bubbles */
 [data-testid="stChatMessageAssistant"] {
@@ -708,7 +755,7 @@ div[data-testid="stChatInput"] button {
 /* Message timestamps */
 .msg-ts {
   font-size: 0.68rem;
-  color: #64748b;
+  color: #cbd5e1;
   font-family: 'JetBrains Mono', monospace;
   margin-top: 0.25rem;
 }
@@ -721,6 +768,7 @@ div[data-testid="stChatInput"] button {
   background: #0f141e !important;
   border: 1px solid var(--border) !important;
   border-radius: var(--radius) !important;
+  box-shadow: var(--shadow);
 }
 [data-testid="stExpander"] summary {
   font-size: 0.82rem !important;
@@ -1029,7 +1077,7 @@ with main_col_left:
     )
     # Character counter
     char_count = len(additional_context)
-    st.markdown(f"<div style='text-align: right; font-size: 0.72rem; color: #64748b; margin-top: -12px;'>{char_count} / 1000</div>", unsafe_allow_html=True)
+    st.markdown(f"<div style='text-align: right; font-size: 0.72rem; color: #cbd5e1; margin-top: -12px;'>{char_count} / 1000</div>", unsafe_allow_html=True)
     
     st.markdown("<div style='height: 0.75rem;'></div>", unsafe_allow_html=True)
     
@@ -1127,7 +1175,7 @@ with main_col_right:
 
     # Chat Input
     user_input = st.chat_input("Ask CloudSec Agent anything...")
-    st.markdown("<p style='text-align: center; font-size: 0.72rem; color: #64748b; margin-top: 0.5rem;'>CloudSec Agent can make mistakes. Please verify important information.</p>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align: center; font-size: 0.72rem; color: #94a3b8; margin-top: 0.5rem;'>CloudSec Agent can make mistakes. Please verify important information.</p>", unsafe_allow_html=True)
 
 # ── Header & Dynamic Dashboard Stats (Rendered at top container) ──────────────
 with top_container:

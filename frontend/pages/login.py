@@ -94,8 +94,8 @@ def inject_css():
         }
 
         .panel {
-          min-height: 360px;
-          padding: 1.35rem;
+          min-height: 440px;
+          padding: 1.5rem;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
@@ -116,8 +116,8 @@ def inject_css():
 
         .card {
           min-height: 0;
-          padding: 1.2rem;
-          margin-bottom: 0.55rem;
+          padding: 1.5rem;
+          margin-bottom: 0.75rem;
         }
 
         .eyebrow {
@@ -184,42 +184,201 @@ def inject_css():
         .stTextInput label {
           color: var(--label) !important;
           font-weight: 500 !important;
+          font-family: 'Inter', sans-serif !important;
+        }
+
+        .stTextInput div[data-baseweb="input"] {
+          background: var(--input-bg) !important;
+          border: 1px solid rgba(15, 23, 42, 0.12) !important;
+          border-radius: 14px !important;
+          transition: all 0.2s ease !important;
+        }
+
+        .stTextInput div[data-baseweb="input"]:hover {
+          border-color: rgba(15, 23, 42, 0.25) !important;
+        }
+
+        .stTextInput div[data-baseweb="input"]:focus-within {
+          border-color: var(--button-start) !important;
+          box-shadow: 0 0 0 3px rgba(30, 97, 247, 0.15) !important;
+        }
+
+        .stTextInput div[data-baseweb="input"]:has(button) input {
+          padding: 0.78rem 0.5rem 0.78rem 0.92rem !important;
         }
 
         .stTextInput input {
-          background: var(--input-bg) !important;
+          background: transparent !important;
           color: var(--input-text) !important;
-          border: 1px solid var(--input-border) !important;
-          border-radius: 14px !important;
+          border: none !important;
+          border-radius: 0 !important;
           padding: 0.78rem 0.92rem !important;
+          font-family: 'Inter', sans-serif !important;
+          box-shadow: none !important;
+          outline: none !important;
         }
 
         .stTextInput input::placeholder {
           color: var(--placeholder) !important;
+          opacity: 1 !important;
+        }
+        .stTextInput input::-webkit-input-placeholder {
+          color: var(--placeholder) !important;
+          opacity: 1 !important;
+        }
+        .stTextInput input::-moz-placeholder {
+          color: var(--placeholder) !important;
+          opacity: 1 !important;
+        }
+        .stTextInput input:-ms-input-placeholder {
+          color: var(--placeholder) !important;
+          opacity: 1 !important;
+        }
+
+        /* Password visibility toggle button styling */
+        .stTextInput div[data-baseweb="input"] button {
+          color: var(--muted) !important;
+          background: transparent !important;
+          border: none !important;
+          padding: 0 0.92rem 0 0.25rem !important;
+          margin: 0 !important;
+          height: 100% !important;
+          align-self: center !important;
+          transition: color 0.15s ease !important;
+          box-shadow: none !important;
+          outline: none !important;
+        }
+        .stTextInput div[data-baseweb="input"] button:hover {
+          color: var(--text) !important;
+          background: transparent !important;
+        }
+        .stTextInput div[data-baseweb="input"] button:focus,
+        .stTextInput div[data-baseweb="input"] button:active {
+          outline: none !important;
+          color: var(--button-start) !important;
+          background: transparent !important;
+        }
+        .stTextInput div[data-baseweb="input"] button svg {
+          fill: currentColor !important;
         }
 
         div[data-testid="InputInstructions"] {
           display: none !important;
         }
 
+        /* Secondary button styling (redirect/switch link buttons) */
         .stButton > button {
+          width: 100%;
+          background: #ffffff !important;
+          color: var(--button-start) !important;
+          border: 1px solid rgba(15, 23, 42, 0.12) !important;
+          border-radius: 14px !important;
+          font-weight: 600 !important;
+          padding: 0.72rem 1rem !important;
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+          font-family: 'Inter', sans-serif !important;
+          transition: all 0.2s ease !important;
+        }
+
+        .stButton > button,
+        .stButton > button * {
+          color: var(--button-start) !important;
+        }
+
+        .stButton > button:hover {
+          background: #f8fafc !important;
+          border-color: rgba(15, 23, 42, 0.2) !important;
+          color: var(--button-start) !important;
+          box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05) !important;
+        }
+        .stButton > button:hover * {
+          color: var(--button-start) !important;
+        }
+
+        .stButton > button:focus,
+        .stButton > button:focus-visible {
+          background: #ffffff !important;
+          border-color: var(--button-start) !important;
+          color: var(--button-start) !important;
+          box-shadow: 0 0 0 3px rgba(30, 97, 247, 0.15) !important;
+          outline: none !important;
+        }
+        .stButton > button:focus *,
+        .stButton > button:focus-visible * {
+          color: var(--button-start) !important;
+        }
+
+        .stButton > button:active {
+          background: #f1f5f9 !important;
+          border-color: rgba(15, 23, 42, 0.25) !important;
+          color: var(--button-start) !important;
+          box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+        }
+        .stButton > button:active * {
+          color: var(--button-start) !important;
+        }
+
+        /* Primary Form Submit Button styling */
+        div[data-testid="stFormSubmitButton"] button {
           width: 100%;
           background: linear-gradient(135deg, var(--button-start), var(--button-end)) !important;
           color: white !important;
-          border: none !important;
+          border: 1px solid var(--button-end) !important;
           border-radius: 14px !important;
+          font-size: 0.95rem !important;
           font-weight: 700 !important;
-          padding: 0.72rem 1rem !important;
-          box-shadow: var(--button-shadow) !important;
+          padding: 0.85rem 1.5rem !important;
+          letter-spacing: 0.02em !important;
+          box-shadow: 0 10px 25px -5px rgba(30, 97, 247, 0.4), 0 8px 20px -6px rgba(30, 97, 247, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+          transition: all 0.2s ease !important;
         }
 
-        .stButton > button:hover { filter: brightness(1.06); }
+        div[data-testid="stFormSubmitButton"] button,
+        div[data-testid="stFormSubmitButton"] button * {
+          color: white !important;
+        }
+
+        div[data-testid="stFormSubmitButton"] button:hover {
+          background: linear-gradient(135deg, var(--button-start), var(--button-start)) !important;
+          filter: brightness(1.08) !important;
+          border-color: var(--button-end) !important;
+          color: white !important;
+          box-shadow: 0 12px 28px -4px rgba(30, 97, 247, 0.5), 0 8px 20px -6px rgba(30, 97, 247, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+        }
+        div[data-testid="stFormSubmitButton"] button:hover * {
+          color: white !important;
+        }
+
+        div[data-testid="stFormSubmitButton"] button:focus,
+        div[data-testid="stFormSubmitButton"] button:focus-visible {
+          background: linear-gradient(135deg, var(--button-start), var(--button-end)) !important;
+          border-color: var(--button-end) !important;
+          color: white !important;
+          box-shadow: 0 0 0 3px rgba(30, 97, 247, 0.35), 0 10px 25px -5px rgba(30, 97, 247, 0.4) !important;
+          outline: none !important;
+        }
+        div[data-testid="stFormSubmitButton"] button:focus *,
+        div[data-testid="stFormSubmitButton"] button:focus-visible * {
+          color: white !important;
+        }
+
+        div[data-testid="stFormSubmitButton"] button:active {
+          background: linear-gradient(135deg, var(--button-end), var(--button-end)) !important;
+          filter: brightness(0.95) !important;
+          border-color: var(--button-end) !important;
+          color: white !important;
+          box-shadow: 0 2px 6px rgba(30, 97, 247, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.15) !important;
+        }
+        div[data-testid="stFormSubmitButton"] button:active * {
+          color: white !important;
+        }
 
         .switch-link {
           text-align: center;
           margin-top: 0.95rem;
           color: var(--muted);
           font-size: 0.92rem;
+          font-family: 'Inter', sans-serif !important;
         }
 
         @media (max-width: 900px) {
