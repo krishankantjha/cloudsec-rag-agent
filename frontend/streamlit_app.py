@@ -892,7 +892,7 @@ def get_file_tag_style(filename):
 def now_ts():
     utc_now = datetime.datetime.now(datetime.timezone.utc)
     ist_now = utc_now + datetime.timedelta(hours=5, minutes=30)
-    return ist_now.strftime("%H:%M")
+    return ist_now.strftime("%I:%M %p")
 
 def format_size(n):
     for unit in ["B", "KB", "MB", "GB"]:
@@ -1291,7 +1291,7 @@ with main_col_right:
                   </div>
                   <p style="margin: 0.5rem 0 0 0;">Upload your files and ask me anything about your cloud security!</p>
                 </div>
-                <div class="welcome-chat-timestamp">12:40 PM</div>
+                <div class="welcome-chat-timestamp">{now_ts()}</div>
               </div>
             </div>
             """,
