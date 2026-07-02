@@ -358,18 +358,20 @@ div.logout-btn-wrapper button[data-testid="baseButton-secondary"]:hover {
 .metadata-text {
   display: flex;
   flex-direction: column;
+  gap: 2px;
+  justify-content: center;
 }
 .metadata-title {
   font-size: 0.68rem;
   font-weight: 500;
   color: #64748b;
-  line-height: 1.2;
+  line-height: 1.35 !important;
 }
 .metadata-value {
   font-size: 0.72rem;
   font-weight: 600;
   color: #cbd5e1;
-  line-height: 1.2;
+  line-height: 1.35 !important;
 }
 .value-green {
   color: #10b981 !important;
@@ -738,21 +740,6 @@ div[data-testid="stChatInput"] {
   border: 1px solid #202230 !important;
   border-radius: 12px !important;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  padding-left: 2.2rem !important;
-  position: relative !important;
-}
-div[data-testid="stChatInput"]::before {
-  content: "+" !important;
-  position: absolute !important;
-  left: 1rem !important;
-  top: 50% !important;
-  transform: translateY(-50%) !important;
-  color: #64748b !important;
-  font-size: 1.35rem !important;
-  font-weight: 400 !important;
-  cursor: pointer !important;
-  transition: color 0.2s ease !important;
-  line-height: 1 !important;
 }
 div[data-testid="stChatInput"]:hover {
   border-color: rgba(0, 210, 255, 0.4) !important;
@@ -760,9 +747,6 @@ div[data-testid="stChatInput"]:hover {
 div[data-testid="stChatInput"]:focus-within {
   border-color: #00d2ff !important;
   box-shadow: 0 0 0 1px rgba(0, 210, 255, 0.2), 0 8px 24px -4px rgba(0, 0, 0, 0.5) !important;
-}
-div[data-testid="stChatInput"]:focus-within::before {
-  color: #00d2ff !important;
 }
 div[data-testid="stChatInput"] textarea {
   color: #f8fafc !important; /* Standard text color */
@@ -785,7 +769,7 @@ div[data-testid="stChatInput"] button:hover {
   background-color: var(--accent-soft) !important;
 }
 .stChatInputContainer {
-  background-color: #070a13 !important;
+  background-color: #0d0e12 !important;
   border: none !important;
 }
 
