@@ -54,15 +54,15 @@ def inject_css():
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
 :root {
-  --bg:            #070a13;
-  --bg-start:      #070a13;
-  --bg-end:        #0c0f1d;
+  --bg:            #0d0e12;
+  --bg-start:      #0d0e12;
+  --bg-end:        #10121a;
   --bg-grad-1:     rgba(0, 210, 255, 0.08);
   --bg-grad-2:     rgba(37, 99, 235, 0.05);
-  --surface:       #0e1424;
-  --surface-hover: #131b2e;
-  --surface-input: #070a13;
-  --border:        #1a233d;
+  --surface:       #151720;
+  --surface-hover: #1c1e29;
+  --surface-input: #0d0e12;
+  --border:        #202230;
   --border-glow:   rgba(0, 210, 255, 0.25);
   --text:          #cbd5e1;
   --text-strong:   #f8fafc;
@@ -349,8 +349,8 @@ div.logout-btn-wrapper button[data-testid="baseButton-secondary"]:hover {
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  background-color: #0e1424;
-  border: 1px solid #1a233d;
+  background-color: #151720;
+  border: 1px solid #202230;
   padding: 0.45rem 0.8rem;
   border-radius: 8px;
   text-align: left;
@@ -535,7 +535,7 @@ div.upload-btn-container button[data-testid="baseButton-primary"]:hover {
 
 /* Custom dashed uploader container */
 div[data-testid="stFileUploader"] {
-  background-color: #0e1424 !important;
+  background-color: #151720 !important;
   border: 1px dashed rgba(0, 210, 255, 0.2) !important;
   border-radius: 12px !important;
   padding: 1rem !important;
@@ -557,8 +557,8 @@ div[data-testid="stFileUploader"]:hover {
   letter-spacing: 0.03em;
 }
 .uploaded-file-card {
-  background: #0e1424 !important;
-  border: 1px solid #1a233d !important;
+  background: #151720 !important;
+  border: 1px solid #202230 !important;
   border-radius: 8px !important;
   padding: 0.5rem 0.75rem !important;
   display: flex;
@@ -734,8 +734,8 @@ div[data-testid="stFileUploader"]:hover {
 
 /* Chat Input Styling */
 div[data-testid="stChatInput"] {
-  background-color: #070a13 !important;
-  border: 1px solid #1a233d !important;
+  background-color: #0d0e12 !important;
+  border: 1px solid #202230 !important;
   border-radius: 12px !important;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
   padding-left: 2.2rem !important;
@@ -830,8 +830,8 @@ div[data-testid="stChatInput"] button:hover {
   flex-direction: row !important;
 }
 [data-testid="stChatMessageAssistant"] [data-testid="stChatMessageContent"] {
-  background: #0e1424 !important;
-  border: 1px solid #1a233d !important;
+  background: #151720 !important;
+  border: 1px solid #202230 !important;
   border-radius: 12px 12px 12px 0 !important;
   color: var(--text-strong) !important;
   display: inline-block !important;
@@ -853,8 +853,8 @@ div[data-testid="stChatInput"] button:hover {
 
 /* Expander custom styling */
 [data-testid="stExpander"] {
-  background: #0e1424 !important;
-  border: 1px solid #1a233d !important;
+  background: #151720 !important;
+  border: 1px solid #202230 !important;
   border-radius: var(--radius) !important;
   box-shadow: var(--shadow);
 }
@@ -1318,7 +1318,7 @@ with main_col_right:
         for msg in active_chat["messages"]:
             with st.chat_message(msg["role"]):
                 if msg.get("content"):
-                    st.markdown(msg["content"])
+                    st.markdown(msg["content"], unsafe_allow_html=True)
                 
                 if msg.get("attachments"):
                     chips = "".join(

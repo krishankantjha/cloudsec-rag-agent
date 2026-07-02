@@ -24,13 +24,13 @@ def inject_css():
         :root {
           --bg-grad-1: rgba(0, 210, 255, 0.08);
           --bg-grad-2: rgba(37, 99, 235, 0.05);
-          --bg-start: #070a13;
-          --bg-end: #0c0f1d;
+          --bg-start: #0d0e12;
+          --bg-end: #10121a;
           --text: #cbd5e1;
           --title: #f8fafc;
           --muted: #64748b;
-          --panel-bg: rgba(14, 20, 36, 0.85);
-          --panel-border: rgba(26, 35, 61, 0.6);
+          --panel-bg: rgba(21, 23, 32, 0.85);
+          --panel-border: rgba(32, 34, 48, 0.6);
           --panel-shadow: 0 10px 32px rgba(0, 0, 0, 0.6);
           --panel-glow: rgba(0, 210, 255, 0.08);
           --eyebrow-border: rgba(0, 210, 255, 0.25);
@@ -39,9 +39,9 @@ def inject_css():
           --bullet-bg: rgba(255, 255, 255, 0.02);
           --bullet-border: rgba(255, 255, 255, 0.05);
           --bullet-text: #cbd5e1;
-          --input-bg: #070a13;
+          --input-bg: #0d0e12;
           --input-text: #f8fafc;
-          --input-border: rgba(26, 35, 61, 0.8);
+          --input-border: rgba(32, 34, 48, 0.8);
           --placeholder: #4b5563;
           --label: #9ca3af;
           --button-start: #00d2ff;
@@ -269,7 +269,7 @@ def inject_css():
         /* Secondary button styling (redirect/switch link buttons) */
         .stButton > button {
           width: 100%;
-          background: #0e1424 !important;
+          background: #151720 !important;
           color: var(--button-start) !important;
           border: 1px solid rgba(0, 210, 255, 0.2) !important;
           border-radius: 14px !important;
@@ -286,7 +286,7 @@ def inject_css():
         }
 
         .stButton > button:hover {
-          background: #131b2e !important;
+          background: #1c1e29 !important;
           border-color: rgba(0, 210, 255, 0.4) !important;
           color: var(--button-start) !important;
           box-shadow: 0 4px 12px rgba(0, 210, 255, 0.1) !important;
@@ -297,7 +297,7 @@ def inject_css():
 
         .stButton > button:focus,
         .stButton > button:focus-visible {
-          background: #0e1424 !important;
+          background: #151720 !important;
           border-color: var(--button-start) !important;
           color: var(--button-start) !important;
           box-shadow: 0 0 0 3px rgba(0, 210, 255, 0.2) !important;
