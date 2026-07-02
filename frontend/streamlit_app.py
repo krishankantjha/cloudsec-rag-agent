@@ -55,12 +55,16 @@ def inject_css():
 
 :root {
   --bg:            #080b11;
+  --bg-start:      #080b11;
+  --bg-end:        #0d1527;
+  --bg-grad-1:     rgba(6, 182, 212, 0.12);
+  --bg-grad-2:     rgba(37, 99, 235, 0.08);
   --surface:       #0f141e;
   --surface-hover: #161e2b;
   --surface-input: #1a2333;
-  --border:        rgba(6, 182, 212, 0.08);
+  --border:        rgba(6, 182, 212, 0.12);
   --border-glow:   rgba(6, 182, 212, 0.3);
-  --text:          #e2e8f0;
+  --text:          #cbd5e1;
   --text-strong:   #f8fafc;
   --accent:        #06b6d4;
   --accent-soft:   #22d3ee;
@@ -75,9 +79,10 @@ def inject_css():
 * { box-sizing: border-box; }
 
 .stApp {
-  background: radial-gradient(circle at 5% 10%, rgba(6, 182, 212, 0.05), transparent 35%),
-              radial-gradient(circle at 95% 85%, rgba(59, 130, 246, 0.03), transparent 30%),
-              var(--bg);
+  background:
+    radial-gradient(circle at 20% 20%, var(--bg-grad-1), transparent 26%),
+    radial-gradient(circle at 80% 82%, var(--bg-grad-2), transparent 22%),
+    linear-gradient(180deg, var(--bg-start) 0%, var(--bg-end) 100%);
   color: var(--text);
   font-family: 'Inter', sans-serif;
 }
@@ -1188,7 +1193,6 @@ with top_container:
             f"""
             <div class="welcome-text-group">
               <h1 class="welcome-title">Welcome back, {first_name}! 👋</h1>
-              <p class="welcome-subtitle">Ask anything about cloud security, analyze files, and get AI-powered insights.</p>
             </div>
             """,
             unsafe_allow_html=True,
@@ -1205,72 +1209,6 @@ with top_container:
             """,
             unsafe_allow_html=True,
         )
-
-    # 2. Dynamic stats calculation
-    total_staged = len(active_staged)
-    findings_count = 0
-    critical_count = 0
-    last_analysis_time = "N/A"
-
-    for msg in active_chat["messages"]:
-        if msg["role"] == "assistant":
-            content_str = msg.get("content", "")
-            findings_count += content_str.count("- ") + content_str.count("* ")
-            content_lower = content_str.lower()
-            critical_count += content_lower.count("critical") + content_lower.count("high") + content_lower.count("vulnerability")
-            if msg.get("timestamp"):
-                last_analysis_time = msg["timestamp"]
-
-    if findings_count > 99: findings_count = 99
-    if critical_count > 99: critical_count = 99
-
-    # 3. Stats Row
-    stats_html = f"""
-    <div class="dashboard-grid">
-      <div class="stat-card stat-card-blue">
-        <div class="stat-icon-container stat-icon-blue">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
-        </div>
-        <div class="stat-content">
-          <div class="stat-title">Files Uploaded</div>
-          <div class="stat-value">{total_staged}</div>
-          <div class="stat-desc">Total files</div>
-        </div>
-      </div>
-      <div class="stat-card stat-card-green">
-        <div class="stat-icon-container stat-icon-green">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 11 2 2 4-4"/></svg>
-        </div>
-        <div class="stat-content">
-          <div class="stat-title">Security Findings</div>
-          <div class="stat-value">{findings_count}</div>
-          <div class="stat-desc">Across all files</div>
-        </div>
-      </div>
-      <div class="stat-card stat-card-orange">
-        <div class="stat-icon-container stat-icon-orange">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-        </div>
-        <div class="stat-content">
-          <div class="stat-title">Critical Issues</div>
-          <div class="stat-value">{critical_count}</div>
-          <div class="stat-desc">Require attention</div>
-        </div>
-      </div>
-      <div class="stat-card stat-card-red">
-        <div class="stat-icon-container stat-icon-red">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        </div>
-        <div class="stat-content">
-          <div class="stat-title">Last Analysis</div>
-          <div class="stat-value" style="font-size: 1.1rem; padding-top: 0.35rem;">{last_analysis_time}</div>
-          <div class="stat-desc">Latest scan</div>
-        </div>
-      </div>
-    </div>
-    """
-    st.markdown(stats_html, unsafe_allow_html=True)
-    st.markdown("<div style='height: 1.5rem;'></div>", unsafe_allow_html=True)
 
 # ── Chat submission handler ───────────────────────────────────────────────────
 should_submit = bool(user_input) or (bool(send_files) and bool(active_staged))

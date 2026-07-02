@@ -22,31 +22,31 @@ def inject_css():
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
         :root {
-          --bg-grad-1: rgba(63,185,80,0.10);
-          --bg-grad-2: rgba(47,129,247,0.08);
-          --bg-start: #f8fafc;
-          --bg-end: #f1f5f9;
-          --text: #1e293b;
-          --title: #0f172a;
+          --bg-grad-1: rgba(6, 182, 212, 0.12);
+          --bg-grad-2: rgba(37, 99, 235, 0.08);
+          --bg-start: #080b11;
+          --bg-end: #0d1527;
+          --text: #cbd5e1;
+          --title: #f8fafc;
           --muted: #64748b;
-          --panel-bg: rgba(248,250,252,0.92);
-          --panel-border: rgba(15,23,42,0.10);
-          --panel-shadow: 0 10px 32px rgba(0,0,0,0.08);
-          --panel-glow: rgba(63,185,80,0.10);
-          --eyebrow-border: rgba(63,185,80,0.25);
-          --eyebrow-bg: rgba(63,185,80,0.08);
-          --eyebrow-text: #16a34a;
-          --bullet-bg: rgba(15,23,42,0.03);
-          --bullet-border: rgba(15,23,42,0.09);
-          --bullet-text: #475569;
-          --input-bg: #f8fafc;
-          --input-text: #0f172a;
-          --input-border: rgba(15,23,42,0.15);
-          --placeholder: #94a3b8;
-          --label: #334155;
-          --button-start: #16a34a;
-          --button-end: #15803d;
-          --button-shadow: 0 8px 20px rgba(22,163,74,0.28);
+          --panel-bg: rgba(15, 20, 30, 0.85);
+          --panel-border: rgba(6, 182, 212, 0.12);
+          --panel-shadow: 0 10px 32px rgba(0, 0, 0, 0.5);
+          --panel-glow: rgba(6, 182, 212, 0.10);
+          --eyebrow-border: rgba(6, 182, 212, 0.3);
+          --eyebrow-bg: rgba(6, 182, 212, 0.1);
+          --eyebrow-text: #06b6d4;
+          --bullet-bg: rgba(255, 255, 255, 0.02);
+          --bullet-border: rgba(255, 255, 255, 0.05);
+          --bullet-text: #cbd5e1;
+          --input-bg: #111827;
+          --input-text: #f8fafc;
+          --input-border: rgba(6, 182, 212, 0.15);
+          --placeholder: #4b5563;
+          --label: #9ca3af;
+          --button-start: #06b6d4;
+          --button-end: #2563eb;
+          --button-shadow: 0 8px 20px rgba(6, 182, 212, 0.25);
         }
 
         .stApp {
@@ -189,18 +189,18 @@ def inject_css():
 
         .stTextInput div[data-baseweb="input"] {
           background: var(--input-bg) !important;
-          border: 1px solid rgba(15, 23, 42, 0.12) !important;
+          border: 1px solid var(--input-border) !important;
           border-radius: 14px !important;
           transition: all 0.2s ease !important;
         }
 
         .stTextInput div[data-baseweb="input"]:hover {
-          border-color: rgba(15, 23, 42, 0.25) !important;
+          border-color: rgba(6, 182, 212, 0.35) !important;
         }
 
         .stTextInput div[data-baseweb="input"]:focus-within {
           border-color: var(--button-start) !important;
-          box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.15) !important;
+          box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.2) !important;
         }
 
         .stTextInput div[data-baseweb="input"]:has(button) input {
@@ -269,13 +269,13 @@ def inject_css():
         /* Secondary button styling (redirect/switch link buttons) */
         .stButton > button {
           width: 100%;
-          background: #ffffff !important;
+          background: #111827 !important;
           color: var(--button-start) !important;
-          border: 1px solid rgba(15, 23, 42, 0.12) !important;
+          border: 1px solid rgba(6, 182, 212, 0.2) !important;
           border-radius: 14px !important;
           font-weight: 600 !important;
           padding: 0.72rem 1rem !important;
-          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
           font-family: 'Inter', sans-serif !important;
           transition: all 0.2s ease !important;
         }
@@ -286,10 +286,10 @@ def inject_css():
         }
 
         .stButton > button:hover {
-          background: #f8fafc !important;
-          border-color: rgba(15, 23, 42, 0.2) !important;
+          background: #161e2b !important;
+          border-color: rgba(6, 182, 212, 0.4) !important;
           color: var(--button-start) !important;
-          box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05) !important;
+          box-shadow: 0 4px 12px rgba(6, 182, 212, 0.1) !important;
         }
         .stButton > button:hover * {
           color: var(--button-start) !important;
@@ -297,10 +297,10 @@ def inject_css():
 
         .stButton > button:focus,
         .stButton > button:focus-visible {
-          background: #ffffff !important;
+          background: #111827 !important;
           border-color: var(--button-start) !important;
           color: var(--button-start) !important;
-          box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.15) !important;
+          box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.2) !important;
           outline: none !important;
         }
         .stButton > button:focus *,
@@ -309,10 +309,10 @@ def inject_css():
         }
 
         .stButton > button:active {
-          background: #f1f5f9 !important;
-          border-color: rgba(15, 23, 42, 0.25) !important;
+          background: #0f141e !important;
+          border-color: rgba(6, 182, 212, 0.3) !important;
           color: var(--button-start) !important;
-          box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+          box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3) !important;
         }
         .stButton > button:active * {
           color: var(--button-start) !important;
@@ -329,7 +329,7 @@ def inject_css():
           font-weight: 700 !important;
           padding: 0.85rem 1.5rem !important;
           letter-spacing: 0.02em !important;
-          box-shadow: 0 10px 25px -5px rgba(22, 163, 74, 0.4), 0 8px 20px -6px rgba(22, 163, 74, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+          box-shadow: 0 10px 25px -5px rgba(6, 182, 212, 0.3), 0 8px 20px -6px rgba(37, 99, 235, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
           transition: all 0.2s ease !important;
         }
 
@@ -343,7 +343,7 @@ def inject_css():
           filter: brightness(1.08) !important;
           border-color: var(--button-end) !important;
           color: white !important;
-          box-shadow: 0 12px 28px -4px rgba(22, 163, 74, 0.5), 0 8px 20px -6px rgba(22, 163, 74, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+          box-shadow: 0 12px 28px -4px rgba(6, 182, 212, 0.4), 0 8px 20px -6px rgba(37, 99, 235, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
         }
         div[data-testid="stFormSubmitButton"] button:hover * {
           color: white !important;
@@ -354,7 +354,7 @@ def inject_css():
           background: linear-gradient(135deg, var(--button-start), var(--button-end)) !important;
           border-color: var(--button-end) !important;
           color: white !important;
-          box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.35), 0 10px 25px -5px rgba(22, 163, 74, 0.4) !important;
+          box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.25), 0 10px 25px -5px rgba(6, 182, 212, 0.3) !important;
           outline: none !important;
         }
         div[data-testid="stFormSubmitButton"] button:focus *,
@@ -367,7 +367,7 @@ def inject_css():
           filter: brightness(0.95) !important;
           border-color: var(--button-end) !important;
           color: white !important;
-          box-shadow: 0 2px 6px rgba(22, 163, 74, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.15) !important;
+          box-shadow: 0 2px 6px rgba(37, 99, 235, 0.15), inset 0 2px 4px rgba(0, 0, 0, 0.15) !important;
         }
         div[data-testid="stFormSubmitButton"] button:active * {
           color: white !important;
