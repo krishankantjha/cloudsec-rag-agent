@@ -54,21 +54,21 @@ def inject_css():
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
 :root {
-  --bg:            #080b11;
-  --bg-start:      #080b11;
-  --bg-end:        #0d1527;
-  --bg-grad-1:     rgba(6, 182, 212, 0.12);
-  --bg-grad-2:     rgba(37, 99, 235, 0.08);
-  --surface:       #0f141e;
-  --surface-hover: #161e2b;
-  --surface-input: #1a2333;
-  --border:        rgba(6, 182, 212, 0.12);
-  --border-glow:   rgba(6, 182, 212, 0.3);
+  --bg:            #070a13;
+  --bg-start:      #070a13;
+  --bg-end:        #0c0f1d;
+  --bg-grad-1:     rgba(0, 210, 255, 0.08);
+  --bg-grad-2:     rgba(37, 99, 235, 0.05);
+  --surface:       #0e1424;
+  --surface-hover: #131b2e;
+  --surface-input: #070a13;
+  --border:        #1a233d;
+  --border-glow:   rgba(0, 210, 255, 0.25);
   --text:          #cbd5e1;
   --text-strong:   #f8fafc;
-  --accent:        #06b6d4;
-  --accent-soft:   #22d3ee;
-  --accent-glow:   rgba(6, 182, 212, 0.15);
+  --accent:        #00d2ff;
+  --accent-soft:   #38bdf8;
+  --accent-glow:   rgba(0, 210, 255, 0.15);
   --success:       #10b981;
   --warning:       #f59e0b;
   --critical:      #ef4444;
@@ -338,17 +338,41 @@ div.logout-btn-wrapper button[data-testid="baseButton-secondary"]:hover {
   color: #cbd5e1 !important;
   margin-top: 0.2rem !important;
 }
-.system-badge {
-  background: rgba(16, 185, 129, 0.08);
-  border: 1px solid rgba(16, 185, 129, 0.15);
-  color: #10b981;
-  font-size: 0.75rem;
-  font-weight: 600;
-  padding: 0.35rem 0.75rem;
-  border-radius: 999px;
-  display: inline-flex;
+.header-metadata-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
   align-items: center;
-  gap: 0.4rem;
+  margin-top: 0.2rem;
+}
+.header-metadata-card {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background-color: #0e1424;
+  border: 1px solid #1a233d;
+  padding: 0.45rem 0.8rem;
+  border-radius: 8px;
+  text-align: left;
+}
+.metadata-text {
+  display: flex;
+  flex-direction: column;
+}
+.metadata-title {
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: #64748b;
+  line-height: 1.2;
+}
+.metadata-value {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #cbd5e1;
+  line-height: 1.2;
+}
+.value-green {
+  color: #10b981 !important;
 }
 
 /* Statistics Grid - CSS Grid to prevent column squishing */
@@ -509,41 +533,89 @@ div.upload-btn-container button[data-testid="baseButton-primary"]:hover {
   box-shadow: 0 4px 16px rgba(6, 182, 212, 0.4) !important;
 }
 
+/* Custom dashed uploader container */
+div[data-testid="stFileUploader"] {
+  background-color: #0e1424 !important;
+  border: 1px dashed rgba(0, 210, 255, 0.2) !important;
+  border-radius: 12px !important;
+  padding: 1rem !important;
+  transition: all 0.2s ease !important;
+}
+div[data-testid="stFileUploader"]:hover {
+  border-color: rgba(0, 210, 255, 0.45) !important;
+  box-shadow: 0 0 12px rgba(0, 210, 255, 0.05) !important;
+}
+
 /* Staged / Uploaded files card list */
 .uploaded-files-heading {
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-weight: 600;
   color: var(--text-strong);
   margin-top: 1.5rem;
   margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
 .uploaded-file-card {
-  background: #0f141e;
-  border: 1px solid var(--border);
-  border-radius: var(--radius) !important;
-  padding: 0.5rem 0.75rem;
+  background: #0e1424 !important;
+  border: 1px solid #1a233d !important;
+  border-radius: 8px !important;
+  padding: 0.5rem 0.75rem !important;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.4rem;
+  gap: 0.6rem;
+  margin-bottom: 0.5rem;
+  width: 100%;
 }
 .uploaded-file-icon {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   display: flex;
   align-items: center;
 }
+.icon-purple { color: #c084fc !important; }
+.icon-orange { color: #fbbf24 !important; }
+.icon-green { color: #34d399 !important; }
+.icon-blue { color: #38bdf8 !important; }
+
 .uploaded-file-name {
   font-size: 0.8rem;
-  color: var(--text-strong);
+  color: #f8fafc !important;
   flex-grow: 1;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .uploaded-file-size {
-  font-size: 0.75rem;
-  color: #cbd5e1;
-  margin-right: 0.5rem;
+  font-size: 0.72rem;
+  color: #64748b;
+  margin-right: 0.2rem;
+  font-family: monospace;
+}
+.uploaded-file-badge {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  color: #94a3b8;
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 0.15rem 0.35rem;
+  text-transform: uppercase;
+  line-height: 1;
+}
+.staged-clear-btn button {
+  background: transparent !important;
+  border: none !important;
+  color: #ef4444 !important;
+  font-size: 0.78rem !important;
+  font-weight: 600 !important;
+  padding: 0 !important;
+  width: auto !important;
+  min-height: 0 !important;
+}
+.staged-clear-btn button:hover {
+  color: #f87171 !important;
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
 /* Remove file button styling */
@@ -565,34 +637,28 @@ div.upload-btn-container button[data-testid="baseButton-primary"]:hover {
 }
 
 /* Clear actions - Inline Links Styling */
-div.clear-btn-wrapper {
+.chat-clear-btn-wrapper {
   display: flex;
-  gap: 1.5rem;
-  margin-top: 1rem;
-}
-div.clear-btn-wrapper button,
-div.clear-btn-wrapper button[data-testid="baseButton-secondary"] {
-  background-color: transparent !important;
-  border: none !important;
-  color: #ef4444 !important;
-  font-size: 0.85rem !important;
-  font-weight: 500 !important;
-  padding: 0 !important;
-  width: auto !important;
-  min-width: 0 !important;
-  box-shadow: none !important;
-  cursor: pointer;
-  text-decoration: none !important;
-  height: auto !important;
-  line-height: normal !important;
-  display: inline-flex !important;
+  justify-content: flex-end;
   align-items: center;
+  height: 100%;
 }
-div.clear-btn-wrapper button:hover,
-div.clear-btn-wrapper button[data-testid="baseButton-secondary"]:hover {
-  text-decoration: underline !important;
-  color: #f87171 !important;
-  background-color: transparent !important;
+.chat-clear-btn-wrapper button {
+  background: transparent !important;
+  border: 1px solid rgba(239, 68, 68, 0.3) !important;
+  color: #ef4444 !important;
+  border-radius: 6px !important;
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+  padding: 0.35rem 0.65rem !important;
+  width: auto !important;
+  min-height: 0 !important;
+  transition: all 0.2s ease !important;
+}
+.chat-clear-btn-wrapper button:hover {
+  border-color: #ef4444 !important;
+  background: rgba(239, 68, 68, 0.05) !important;
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.1) !important;
 }
 
 /* Welcome Assistant Card (Right Col) */
@@ -642,33 +708,61 @@ div.clear-btn-wrapper button[data-testid="baseButton-secondary"]:hover {
   margin-bottom: 0.35rem;
   color: var(--text-strong);
 }
-.green-check {
-  color: #10b981 !important;
-  font-weight: 700 !important;
-  flex-shrink: 0;
+.welcome-chat-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.6rem 0 0.8rem 0;
+}
+.welcome-chat-pill {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 6px !important;
+  padding: 0.35rem 0.65rem !important;
+  font-size: 0.76rem !important;
+  color: #cbd5e1 !important;
+  display: inline-flex !important;
+  align-items: center;
+  gap: 0.4rem;
 }
 .welcome-chat-timestamp {
   font-size: 0.68rem;
-  color: #cbd5e1;
+  color: #64748b;
   margin-top: 0.6rem;
   font-family: 'JetBrains Mono', monospace;
 }
 
 /* Chat Input Styling */
 div[data-testid="stChatInput"] {
-  background-color: #0f141e !important;
-  border: 1px solid rgba(6, 182, 212, 0.15) !important;
+  background-color: #070a13 !important;
+  border: 1px solid #1a233d !important;
   border-radius: 12px !important;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  padding-left: 2.2rem !important;
+  position: relative !important;
+}
+div[data-testid="stChatInput"]::before {
+  content: "+" !important;
+  position: absolute !important;
+  left: 1rem !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  color: #64748b !important;
+  font-size: 1.35rem !important;
+  font-weight: 400 !important;
+  cursor: pointer !important;
+  transition: color 0.2s ease !important;
+  line-height: 1 !important;
 }
 div[data-testid="stChatInput"]:hover {
-  border-color: rgba(6, 182, 212, 0.35) !important;
-  background-color: #121824 !important;
+  border-color: rgba(0, 210, 255, 0.4) !important;
 }
 div[data-testid="stChatInput"]:focus-within {
-  border-color: var(--accent) !important;
-  background-color: #121824 !important;
-  box-shadow: 0 0 0 1px rgba(6, 182, 212, 0.2), 0 8px 24px -4px rgba(0, 0, 0, 0.5) !important;
+  border-color: #00d2ff !important;
+  box-shadow: 0 0 0 1px rgba(0, 210, 255, 0.2), 0 8px 24px -4px rgba(0, 0, 0, 0.5) !important;
+}
+div[data-testid="stChatInput"]:focus-within::before {
+  color: #00d2ff !important;
 }
 div[data-testid="stChatInput"] textarea {
   color: #f8fafc !important; /* Standard text color */
@@ -683,7 +777,7 @@ div[data-testid="stChatInput"] textarea::placeholder {
 }
 div[data-testid="stChatInput"] button {
   background-color: var(--accent) !important;
-  color: #080b11 !important;
+  color: #070a13 !important;
   border-radius: 8px !important;
   transition: all 0.2s ease !important;
 }
@@ -691,7 +785,7 @@ div[data-testid="stChatInput"] button:hover {
   background-color: var(--accent-soft) !important;
 }
 .stChatInputContainer {
-  background-color: #080b11 !important;
+  background-color: #070a13 !important;
   border: none !important;
 }
 
@@ -721,8 +815,8 @@ div[data-testid="stChatInput"] button:hover {
   text-align: right !important;
 }
 [data-testid="stChatMessageUser"] [data-testid="stChatMessageContent"] {
-  background: var(--surface-hover) !important;
-  border: 1px solid var(--border) !important;
+  background: #182235 !important;
+  border: 1px solid rgba(0, 210, 255, 0.15) !important;
   border-radius: 12px 12px 0 12px !important;
   color: var(--text-strong) !important;
   text-align: left !important;
@@ -736,8 +830,8 @@ div[data-testid="stChatInput"] button:hover {
   flex-direction: row !important;
 }
 [data-testid="stChatMessageAssistant"] [data-testid="stChatMessageContent"] {
-  background: #0f141e !important;
-  border: 1px solid var(--border) !important;
+  background: #0e1424 !important;
+  border: 1px solid #1a233d !important;
   border-radius: 12px 12px 12px 0 !important;
   color: var(--text-strong) !important;
   display: inline-block !important;
@@ -759,13 +853,39 @@ div[data-testid="stChatInput"] button:hover {
 
 /* Expander custom styling */
 [data-testid="stExpander"] {
-  background: #0f141e !important;
-  border: 1px solid var(--border) !important;
+  background: #0e1424 !important;
+  border: 1px solid #1a233d !important;
   border-radius: var(--radius) !important;
   box-shadow: var(--shadow);
 }
 [data-testid="stExpander"] summary {
   font-size: 0.82rem !important;
+}
+
+/* Custom embedded alert elements for chat response warnings */
+.security-alert-high {
+  background-color: rgba(239, 68, 68, 0.04) !important;
+  border: 1px solid rgba(239, 68, 68, 0.25) !important;
+  border-radius: 8px !important;
+  padding: 0.8rem 1rem !important;
+  margin: 0.75rem 0 !important;
+  text-align: left;
+}
+.security-alert-high-title {
+  font-size: 0.82rem !important;
+  font-weight: 700 !important;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.35rem;
+  color: #f87171 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.security-alert-high-body {
+  font-size: 0.78rem !important;
+  color: #cbd5e1 !important;
+  line-height: 1.5;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -773,6 +893,18 @@ div[data-testid="stChatInput"] button:hover {
 
 # ── Helpers ──────────────────────────────────────────────────────────────────
 def get_ext(name): return os.path.splitext(name.lower())[1]
+def get_file_tag_style(filename):
+    ext = get_ext(filename)
+    if ext == ".json":
+        return "purple", "JSON"
+    elif ext in [".log", ".txt"]:
+        return "orange", "LOG" if "log" in ext else "TXT"
+    elif ext in [".yaml", ".yml", ".tf", ".tfvars"]:
+        return "green", "YAML" if "yaml" in ext else "TF"
+    elif ext == ".py":
+        return "blue", "PY"
+    else:
+        return "blue", ext[1:].upper() if len(ext) > 1 else "FILE"
 def now_ts():
     utc_now = datetime.datetime.now(datetime.timezone.utc)
     ist_now = utc_now + datetime.timedelta(hours=5, minutes=30)
@@ -1080,19 +1212,32 @@ with main_col_left:
     
     # Primary analysis button
     st.markdown("<div class='upload-btn-container'>", unsafe_allow_html=True)
-    send_files = st.button("🚀 Upload & Analyze", use_container_width=True, disabled=too_many_files)
+    send_files = st.button("📤 Upload & Analyze Files", use_container_width=True, disabled=too_many_files)
     st.markdown("</div>", unsafe_allow_html=True)
     
     # Render custom staged file list
     if active_staged:
-        st.markdown(f"<div class='uploaded-files-heading'>Uploaded Files ({len(active_staged)})</div>", unsafe_allow_html=True)
+        col_sh, col_sca = st.columns([2.5, 1.5])
+        with col_sh:
+            st.markdown(f"<div class='uploaded-files-heading'>Staged Files ({len(active_staged)})</div>", unsafe_allow_html=True)
+        with col_sca:
+            st.markdown("<div class='staged-clear-btn' style='text-align: right; margin-top: 1.25rem;'>", unsafe_allow_html=True)
+            if st.button("Clear All", key="staged_clear_all", use_container_width=True):
+                if uploaded_files:
+                    for f in uploaded_files:
+                        st.session_state.removed_files.add(f.name)
+                st.rerun()
+            st.markdown("</div>", unsafe_allow_html=True)
+
         for f in active_staged:
+            color_class, badge_text = get_file_tag_style(f.name)
             col_file, col_del = st.columns([6, 1])
             with col_file:
                 st.markdown(f"""
                 <div class="uploaded-file-card">
-                  <div class="uploaded-file-icon">📄</div>
+                  <div class="uploaded-file-icon icon-{color_class}">📄</div>
                   <div class="uploaded-file-name">{f.name}</div>
+                  <div class="uploaded-file-badge">{badge_text}</div>
                   <div class="uploaded-file-size">{format_size(len(f.getvalue()))}</div>
                 </div>
                 """, unsafe_allow_html=True)
@@ -1102,46 +1247,67 @@ with main_col_left:
                     st.session_state.removed_files.add(f.name)
                     st.rerun()
                 st.markdown("</div>", unsafe_allow_html=True)
-                
-    # Actions footer (Clear all / Clear chat)
-    st.markdown("<div class='clear-btn-wrapper'>", unsafe_allow_html=True)
-    col_cf, col_cc = st.columns(2)
-    with col_cf:
-        if st.button("Clear all", key="clear_all_files"):
-            if uploaded_files:
-                for f in uploaded_files:
-                    st.session_state.removed_files.add(f.name)
-            st.rerun()
-    with col_cc:
-        if st.button("Clear chat", key="clear_chat_timeline"):
+
+with main_col_right:
+    # Chat header
+    ch_col_left, ch_col_right = st.columns([3, 1])
+    with ch_col_left:
+        st.markdown(
+            """
+            <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.5rem; text-align: left;">
+              <div class="chat-avatar-left" style="background: rgba(0, 210, 255, 0.08); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00d2ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <div>
+                <div style="font-size: 0.92rem; font-weight: 700; color: #f8fafc; line-height: 1.2;">Chat with CloudSec Agent</div>
+                <div style="font-size: 0.72rem; color: #64748b; line-height: 1.2;">Intelligent • Context-Aware • Secure</div>
+              </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+    with ch_col_right:
+        # Styled clear chat button
+        st.markdown("<div class='chat-clear-btn-wrapper'>", unsafe_allow_html=True)
+        if st.button("Clear Chat", key="clear_chat_timeline", use_container_width=True):
             active_chat["messages"] = []
             active_chat["title"] = "New chat"
             st.session_state.removed_files = set()
             refresh_chat_meta(active_chat)
             st.rerun()
-    st.markdown("</div>", unsafe_allow_html=True)
+        st.markdown("</div>", unsafe_allow_html=True)
 
-with main_col_right:
+    st.markdown("<div style='height: 0.75rem;'></div>", unsafe_allow_html=True)
+
     # Render Welcome Assistant Card if chat history is empty
     if not active_chat["messages"]:
         st.markdown(
             f"""
             <div class="welcome-chat-card">
               <div class="chat-avatar-left">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00d2ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
               </div>
               <div class="welcome-chat-content">
-                <div class="welcome-chat-header">Hello! I'm CloudSec Agent.</div>
+                <div class="welcome-chat-header">👋 Hello! I'm CloudSec Agent</div>
                 <div class="welcome-chat-body">
-                  <p>I can help you with:</p>
-                  <div class="welcome-check-item"><span class="green-check">✓</span> IAM policy reviews</div>
-                  <div class="welcome-check-item"><span class="green-check">✓</span> Cloud log analysis</div>
-                  <div class="welcome-check-item"><span class="green-check">✓</span> IaC security scanning</div>
-                  <div class="welcome-check-item"><span class="green-check">✓</span> Security best practices</div>
-                  <div class="welcome-check-item"><span class="green-check">✓</span> Incident investigation</div>
-                  <p style="margin-top: 0.8rem; margin-bottom: 0;">What would you like to analyze today?</p>
+                  <p style="margin: 0 0 0.5rem 0; color: #94a3b8;">I can help you with:</p>
+                  <div class="welcome-chat-pills">
+                    <div class="welcome-chat-pill">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#c084fc" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                      IAM Policy Reviews
+                    </div>
+                    <div class="welcome-chat-pill">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19A3.5 3.5 0 0 0 13 15.5a3.5 3.5 0 0 0-6 0A3.5 3.5 0 0 0 2.5 19h15z"/></svg>
+                      Cloud Log Analysis
+                    </div>
+                    <div class="welcome-chat-pill">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                      IaC Security Scanning
+                    </div>
+                  </div>
+                  <p style="margin: 0.5rem 0 0 0;">Upload your files and ask me anything about your cloud security!</p>
                 </div>
-                <div class="welcome-chat-timestamp">10:30 AM</div>
+                <div class="welcome-chat-timestamp">12:40 PM</div>
               </div>
             </div>
             """,
@@ -1167,16 +1333,19 @@ with main_col_right:
                                 st.code(att["text_preview"], language="text")
                                 
                 if msg.get("timestamp"):
-                    st.markdown(f"<div class='msg-ts'>{msg['timestamp']}</div>", unsafe_allow_html=True)
+                    if msg["role"] == "user":
+                        st.markdown(f"<div class='msg-ts'>{msg['timestamp']} <span style='color: #00d2ff; margin-left: 0.2rem;'>✓✓</span></div>", unsafe_allow_html=True)
+                    else:
+                        st.markdown(f"<div class='msg-ts'>{msg['timestamp']}</div>", unsafe_allow_html=True)
 
     # Chat Input
-    user_input = st.chat_input("Ask CloudSec Agent anything...")
-    st.markdown("<p style='text-align: center; font-size: 0.72rem; color: #94a3b8; margin-top: 0.5rem;'>CloudSec Agent can make mistakes. Please verify important information.</p>", unsafe_allow_html=True)
+    user_input = st.chat_input("Ask anything about your cloud security...")
+    st.markdown("<p style='text-align: center; font-size: 0.72rem; color: #64748b; margin-top: 0.5rem;'><span style='color: #fbbf24; margin-right: 0.15rem;'>💡</span> Tip: Be specific about what you want to analyze for better results</p>", unsafe_allow_html=True)
 
 # ── Header & Dynamic Dashboard Stats (Rendered at top container) ──────────────
 with top_container:
     # 1. Top Header Row
-    th_col_left, th_col_right = st.columns([3, 1])
+    th_col_left, th_col_right = st.columns([2.2, 1.8])
     with th_col_left:
         user_email = st.session_state.get('user_email') or 'krishan@example.com'
         first_name = get_user_name_from_email(user_email).split(' ')[0]
@@ -1184,18 +1353,34 @@ with top_container:
             f"""
             <div class="welcome-text-group">
               <h1 class="welcome-title">Welcome back, {first_name}!</h1>
+              <p class="welcome-subtitle">Your AI-Powered Cloud Security Assistant</p>
             </div>
             """,
             unsafe_allow_html=True,
         )
     with th_col_right:
+        utc_now = datetime.datetime.now(datetime.timezone.utc)
+        ist_now = utc_now + datetime.timedelta(hours=5, minutes=30)
+        time_str = ist_now.strftime("%I:%M %p IST")
+        date_str = ist_now.strftime("%b %d, %Y")
+        
         st.markdown(
-            """
-            <div style="text-align: right; margin-top: 0.5rem; margin-bottom: 1rem;">
-              <span class="system-badge">
-                <span style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #10b981; box-shadow: 0 0 8px #10b981;"></span>
-                System Operational
-              </span>
+            f"""
+            <div class="header-metadata-group">
+              <div class="header-metadata-card">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 11 11 13 15 9"/></svg>
+                <div class="metadata-text">
+                  <div class="metadata-title">Secure Session</div>
+                  <div class="metadata-value value-green">256-bit Encrypted</div>
+                </div>
+              </div>
+              <div class="header-metadata-card">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <div class="metadata-text">
+                  <div class="metadata-value">{time_str}</div>
+                  <div class="metadata-title">{date_str}</div>
+                </div>
+              </div>
             </div>
             """,
             unsafe_allow_html=True,

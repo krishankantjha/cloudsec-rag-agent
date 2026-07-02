@@ -22,31 +22,31 @@ def inject_css():
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
         :root {
-          --bg-grad-1: rgba(6, 182, 212, 0.12);
-          --bg-grad-2: rgba(37, 99, 235, 0.08);
-          --bg-start: #080b11;
-          --bg-end: #0d1527;
+          --bg-grad-1: rgba(0, 210, 255, 0.08);
+          --bg-grad-2: rgba(37, 99, 235, 0.05);
+          --bg-start: #070a13;
+          --bg-end: #0c0f1d;
           --text: #cbd5e1;
           --title: #f8fafc;
           --muted: #64748b;
-          --panel-bg: rgba(15, 20, 30, 0.85);
-          --panel-border: rgba(6, 182, 212, 0.12);
-          --panel-shadow: 0 10px 32px rgba(0, 0, 0, 0.5);
-          --panel-glow: rgba(6, 182, 212, 0.10);
-          --eyebrow-border: rgba(6, 182, 212, 0.3);
-          --eyebrow-bg: rgba(6, 182, 212, 0.1);
-          --eyebrow-text: #06b6d4;
+          --panel-bg: rgba(14, 20, 36, 0.85);
+          --panel-border: rgba(26, 35, 61, 0.6);
+          --panel-shadow: 0 10px 32px rgba(0, 0, 0, 0.6);
+          --panel-glow: rgba(0, 210, 255, 0.08);
+          --eyebrow-border: rgba(0, 210, 255, 0.25);
+          --eyebrow-bg: rgba(0, 210, 255, 0.05);
+          --eyebrow-text: #00d2ff;
           --bullet-bg: rgba(255, 255, 255, 0.02);
           --bullet-border: rgba(255, 255, 255, 0.05);
           --bullet-text: #cbd5e1;
-          --input-bg: #111827;
+          --input-bg: #070a13;
           --input-text: #f8fafc;
-          --input-border: rgba(6, 182, 212, 0.15);
+          --input-border: rgba(26, 35, 61, 0.8);
           --placeholder: #4b5563;
           --label: #9ca3af;
-          --button-start: #06b6d4;
-          --button-end: #2563eb;
-          --button-shadow: 0 8px 20px rgba(6, 182, 212, 0.25);
+          --button-start: #00d2ff;
+          --button-end: #0088cc;
+          --button-shadow: 0 8px 20px rgba(0, 210, 255, 0.2);
         }
 
         .stApp {
@@ -195,12 +195,12 @@ def inject_css():
         }
 
         .stTextInput div[data-baseweb="input"]:hover {
-          border-color: rgba(6, 182, 212, 0.35) !important;
+          border-color: rgba(0, 210, 255, 0.35) !important;
         }
 
         .stTextInput div[data-baseweb="input"]:focus-within {
           border-color: var(--button-start) !important;
-          box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.2) !important;
+          box-shadow: 0 0 0 3px rgba(0, 210, 255, 0.2) !important;
         }
 
         .stTextInput div[data-baseweb="input"]:has(button) input {
@@ -269,9 +269,9 @@ def inject_css():
         /* Secondary button styling (redirect/switch link buttons) */
         .stButton > button {
           width: 100%;
-          background: #111827 !important;
+          background: #0e1424 !important;
           color: var(--button-start) !important;
-          border: 1px solid rgba(6, 182, 212, 0.2) !important;
+          border: 1px solid rgba(0, 210, 255, 0.2) !important;
           border-radius: 14px !important;
           font-weight: 600 !important;
           padding: 0.72rem 1rem !important;
@@ -286,10 +286,10 @@ def inject_css():
         }
 
         .stButton > button:hover {
-          background: #161e2b !important;
-          border-color: rgba(6, 182, 212, 0.4) !important;
+          background: #131b2e !important;
+          border-color: rgba(0, 210, 255, 0.4) !important;
           color: var(--button-start) !important;
-          box-shadow: 0 4px 12px rgba(6, 182, 212, 0.1) !important;
+          box-shadow: 0 4px 12px rgba(0, 210, 255, 0.1) !important;
         }
         .stButton > button:hover * {
           color: var(--button-start) !important;
@@ -297,10 +297,10 @@ def inject_css():
 
         .stButton > button:focus,
         .stButton > button:focus-visible {
-          background: #111827 !important;
+          background: #0e1424 !important;
           border-color: var(--button-start) !important;
           color: var(--button-start) !important;
-          box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.2) !important;
+          box-shadow: 0 0 0 3px rgba(0, 210, 255, 0.2) !important;
           outline: none !important;
         }
         .stButton > button:focus *,
@@ -309,8 +309,8 @@ def inject_css():
         }
 
         .stButton > button:active {
-          background: #0f141e !important;
-          border-color: rgba(6, 182, 212, 0.3) !important;
+          background: #0b0f19 !important;
+          border-color: rgba(0, 210, 255, 0.3) !important;
           color: var(--button-start) !important;
           box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3) !important;
         }
@@ -329,7 +329,7 @@ def inject_css():
           font-weight: 700 !important;
           padding: 0.85rem 1.5rem !important;
           letter-spacing: 0.02em !important;
-          box-shadow: 0 10px 25px -5px rgba(6, 182, 212, 0.3), 0 8px 20px -6px rgba(37, 99, 235, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+          box-shadow: 0 10px 25px -5px rgba(0, 210, 255, 0.3), 0 8px 20px -6px rgba(37, 99, 235, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
           transition: all 0.2s ease !important;
         }
 
@@ -343,7 +343,7 @@ def inject_css():
           filter: brightness(1.08) !important;
           border-color: var(--button-end) !important;
           color: white !important;
-          box-shadow: 0 12px 28px -4px rgba(6, 182, 212, 0.4), 0 8px 20px -6px rgba(37, 99, 235, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+          box-shadow: 0 12px 28px -4px rgba(0, 210, 255, 0.4), 0 8px 20px -6px rgba(37, 99, 235, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
         }
         div[data-testid="stFormSubmitButton"] button:hover * {
           color: white !important;
@@ -354,7 +354,7 @@ def inject_css():
           background: linear-gradient(135deg, var(--button-start), var(--button-end)) !important;
           border-color: var(--button-end) !important;
           color: white !important;
-          box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.25), 0 10px 25px -5px rgba(6, 182, 212, 0.3) !important;
+          box-shadow: 0 0 0 3px rgba(0, 210, 255, 0.25), 0 10px 25px -5px rgba(0, 210, 255, 0.3) !important;
           outline: none !important;
         }
         div[data-testid="stFormSubmitButton"] button:focus *,
