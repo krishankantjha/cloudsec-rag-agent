@@ -659,7 +659,6 @@ div[data-testid="stChatInput"] {
   background-color: #0f141e !important;
   border: 1px solid rgba(6, 182, 212, 0.15) !important;
   border-radius: 12px !important;
-  padding: 8px 12px !important;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 div[data-testid="stChatInput"]:hover {
@@ -671,24 +670,15 @@ div[data-testid="stChatInput"]:focus-within {
   background-color: #121824 !important;
   box-shadow: 0 0 0 1px rgba(6, 182, 212, 0.2), 0 8px 24px -4px rgba(0, 0, 0, 0.5) !important;
 }
-div[data-testid="stChatInput"] div {
-  background-color: transparent !important;
-  border: none !important;
-}
 div[data-testid="stChatInput"] textarea {
-  color: #f8fafc !important; /* Ensure input text is bright and visible */
-  -webkit-text-fill-color: #f8fafc !important; /* Force text color override in Webkit browsers */
+  color: #f8fafc !important; /* Standard text color */
   background-color: transparent !important;
   font-family: 'Inter', sans-serif !important;
   font-size: 0.92rem !important;
-  line-height: 1.5 !important;
   caret-color: var(--accent) !important; /* Cyan cursor */
-  opacity: 1 !important;
-  padding: 4px 0 !important;
 }
 div[data-testid="stChatInput"] textarea::placeholder {
-  color: #94a3b8 !important; /* Clear placeholder, distinguishable from typed text */
-  -webkit-text-fill-color: #94a3b8 !important;
+  color: #94a3b8 !important; /* Clear placeholder */
   opacity: 0.85 !important;
 }
 div[data-testid="stChatInput"] button {
@@ -699,7 +689,6 @@ div[data-testid="stChatInput"] button {
 }
 div[data-testid="stChatInput"] button:hover {
   background-color: var(--accent-soft) !important;
-  transform: scale(1.05) !important;
 }
 .stChatInputContainer {
   background-color: #080b11 !important;
@@ -784,7 +773,10 @@ div[data-testid="stChatInput"] button:hover {
 
 # ── Helpers ──────────────────────────────────────────────────────────────────
 def get_ext(name): return os.path.splitext(name.lower())[1]
-def now_ts():      return datetime.datetime.now().strftime("%H:%M")
+def now_ts():
+    utc_now = datetime.datetime.now(datetime.timezone.utc)
+    ist_now = utc_now + datetime.timedelta(hours=5, minutes=30)
+    return ist_now.strftime("%H:%M")
 
 def format_size(n):
     for unit in ["B", "KB", "MB", "GB"]:
@@ -1074,8 +1066,8 @@ with main_col_left:
     
     # Context input
     additional_context = st.text_area(
-        "Additional Context (Optional)",
-        placeholder="Provide context about the files, your concerns, or what you want me to focus on.\n\nExample:\nThese logs are from a suspected privilege escalation incident...",
+        "Analysis Instructions",
+        placeholder="Describe your analysis goals, target files, or security concerns.",
         key="additional_context_input",
         height=130,
         max_chars=1000,
@@ -1115,13 +1107,13 @@ with main_col_left:
     st.markdown("<div class='clear-btn-wrapper'>", unsafe_allow_html=True)
     col_cf, col_cc = st.columns(2)
     with col_cf:
-        if st.button("🗑️ Clear all", key="clear_all_files"):
+        if st.button("Clear all", key="clear_all_files"):
             if uploaded_files:
                 for f in uploaded_files:
                     st.session_state.removed_files.add(f.name)
             st.rerun()
     with col_cc:
-        if st.button("🧹 Clear chat", key="clear_chat_timeline"):
+        if st.button("Clear chat", key="clear_chat_timeline"):
             active_chat["messages"] = []
             active_chat["title"] = "New chat"
             st.session_state.removed_files = set()
@@ -1158,8 +1150,7 @@ with main_col_right:
     else:
         # Render Chat History
         for msg in active_chat["messages"]:
-            avatar = "🧑‍💻" if msg["role"] == "user" else "🤖"
-            with st.chat_message(msg["role"], avatar=avatar):
+            with st.chat_message(msg["role"]):
                 if msg.get("content"):
                     st.markdown(msg["content"])
                 
@@ -1192,7 +1183,7 @@ with top_container:
         st.markdown(
             f"""
             <div class="welcome-text-group">
-              <h1 class="welcome-title">Welcome back, {first_name}! 👋</h1>
+              <h1 class="welcome-title">Welcome back, {first_name}!</h1>
             </div>
             """,
             unsafe_allow_html=True,
