@@ -37,6 +37,7 @@ def load_documents(data_path=None):
     allowed_extensions = {
         ".txt", ".md", ".json", ".yaml", ".yml", ".log", ".cfg", ".conf",
         ".ini", ".tf", ".hcl", ".py", ".js", ".ts", ".sql", ".xml", ".csv",
+        ".pdf",
     }
 
     for root, _, files in os.walk(base_path):
@@ -47,18 +48,31 @@ def load_documents(data_path=None):
                 continue
 
             try:
-                with open(file_path, "r", encoding="utf-8") as f:
-                    content = f.read()
+                filename = os.path.basename(file_path)
+                if extension == ".pdf":
+                    try:
+                        import pypdf
+                        reader = pypdf.PdfReader(file_path)
+                        content = ""
+                        for page in reader.pages:
+                            text = page.extract_text()
+                            if text:
+                                content += text + "\n"
+                    except ImportError:
+                        print(f"pypdf is not installed; skipping PDF file: {file_path}")
+                        continue
+                else:
+                    with open(file_path, "r", encoding="utf-8") as f:
+                        content = f.read()
 
-                    filename = os.path.basename(file_path)
-                    for index, chunk in enumerate(_chunk_text(content), start=1):
-                        documents.append({
-                            "content": chunk,
-                            "source": f"{file_path}#chunk-{index}",
-                            "source_path": file_path,
-                            "filename": filename,
-                            "chunk_id": index,
-                        })
+                for index, chunk in enumerate(_chunk_text(content), start=1):
+                    documents.append({
+                        "content": chunk,
+                        "source": f"{file_path}#chunk-{index}",
+                        "source_path": file_path,
+                        "filename": filename,
+                        "chunk_id": index,
+                    })
             except Exception as e:
                 print(f"Error reading {file_path}: {e}")
 
