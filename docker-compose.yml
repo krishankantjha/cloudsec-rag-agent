@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: cloudsec-backend:latest
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+      - ./vectorstore:/app/vectorstore
+    environment:
+      - ENVIRONMENT=development
+      - PORT=8000
+      - HOST=0.0.0.0
+      - DATABASE_URL=sqlite:///app/data/users.db
+      - VECTORSTORE_DIR=/app/vectorstore
+      - DATA_DIR=/app/data
+    env_file:
+      - .env
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: cloudsec-frontend:latest
+    command: ["streamlit", "run", "frontend/streamlit_app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+    ports:
+      - "8501:8501"
+    environment:
+      - CLOUDSEC_API_URL=http://backend:8000
+    depends_on:
+      - backend
+    env_file:
+      - .env
