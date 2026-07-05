@@ -872,11 +872,8 @@ div[data-testid="stChatInput"] button:hover {
   line-height: 1.5;
 }
 
-/* Navigation buttons in sidebar */
-.nav-btn-chat, .nav-btn-reports, .nav-btn-docs {
-  margin-bottom: 0.5rem;
-}
-.nav-btn-chat button, .nav-btn-reports button, .nav-btn-docs button {
+/* Navigation buttons in sidebar - Specific overrides */
+[data-testid="stSidebar"] div.stButton > button {
   text-align: left !important;
   justify-content: flex-start !important;
   background-color: transparent !important;
@@ -885,17 +882,36 @@ div[data-testid="stChatInput"] button:hover {
   font-weight: 500 !important;
   padding: 0.55rem 0.75rem !important;
   transition: all 0.15s !important;
+  width: 100% !important;
 }
-.nav-btn-chat button:hover, .nav-btn-reports button:hover, .nav-btn-docs button:hover {
+[data-testid="stSidebar"] div.stButton > button:hover {
   background-color: rgba(255, 255, 255, 0.02) !important;
   color: #f8fafc !important;
   border-color: var(--border) !important;
 }
-.nav-btn-chat.active button, .nav-btn-reports.active button, .nav-btn-docs.active button {
+
+/* Active navigation button highlights */
+.nav-btn-chat.active button, 
+.nav-btn-reports.active button, 
+.nav-btn-docs.active button {
   color: var(--accent) !important;
   background-color: var(--accent-glow) !important;
   border-color: var(--accent) !important;
   font-weight: 600 !important;
+}
+
+/* Force clean, uniform spacing on sidebar widgets and empty layout divs */
+[data-testid="stSidebar"] div.stButton {
+  margin-top: 0px !important;
+  margin-bottom: 4px !important;
+}
+[data-testid="stSidebar"] div[data-testid="stMarkdownContainer"] {
+  margin: 0px !important;
+  padding: 0px !important;
+}
+[data-testid="stSidebar"] .nav-heading {
+  margin-top: 1.25rem !important;
+  margin-bottom: 0.5rem !important;
 }
 </style>
 """, unsafe_allow_html=True)
