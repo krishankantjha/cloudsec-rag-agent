@@ -102,6 +102,7 @@ footer {
 [data-testid="stSidebar"] {
   background: #0b0f17 !important;
   border-right: 1px solid var(--border);
+  overflow-y: hidden !important;
 }
 [data-testid="stSidebarNav"] {
   display: none !important;
@@ -1152,21 +1153,33 @@ def render_sidebar():
         st.markdown("<div class='nav-heading'>NAVIGATION</div>", unsafe_allow_html=True)
         active_tab = st.session_state.get("active_tab", "Chat")
 
-        st.markdown(f"<div class='nav-btn-chat{' active' if active_tab == 'Chat' else ''}'>", unsafe_allow_html=True)
         if st.button("💬 Chat Workspace", key="sidebar_nav_chat", use_container_width=True):
             st.session_state.active_tab = "Chat"
             st.rerun()
-        st.markdown("</div>", unsafe_allow_html=True)
 
-        st.markdown(f"<div class='nav-btn-reports{' active' if active_tab == 'Reports' else ''}'>", unsafe_allow_html=True)
         if st.button("📊 Analytics Dashboard", key="sidebar_nav_reports", use_container_width=True):
             st.session_state.active_tab = "Reports"
             st.rerun()
 
-        st.markdown(f"<div class='nav-btn-docs{' active' if active_tab == 'Docs' else ''}'>", unsafe_allow_html=True)
         if st.button("📖 Documentation Library", key="sidebar_nav_docs", use_container_width=True):
             st.session_state.active_tab = "Docs"
             st.rerun()
+
+        # Inject dynamic CSS to highlight only the active button based on index order in the sidebar
+        active_index = {"Chat": 1, "Reports": 2, "Docs": 3}[active_tab]
+        st.markdown(
+            f"""
+            <style>
+            [data-testid="stSidebar"] div.stButton:nth-of-type({active_index}) button {{
+              color: var(--accent) !important;
+              background-color: var(--accent-glow) !important;
+              border-color: var(--accent) !important;
+              font-weight: 600 !important;
+            }}
+            </style>
+            """,
+            unsafe_allow_html=True,
+        )
 
         # Export findings button
         active_chat = get_active_chat()
