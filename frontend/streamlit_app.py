@@ -871,6 +871,32 @@ div[data-testid="stChatInput"] button:hover {
   color: #cbd5e1 !important;
   line-height: 1.5;
 }
+
+/* Navigation buttons in sidebar */
+.nav-btn-chat, .nav-btn-reports, .nav-btn-docs {
+  margin-bottom: 0.5rem;
+}
+.nav-btn-chat button, .nav-btn-reports button, .nav-btn-docs button {
+  text-align: left !important;
+  justify-content: flex-start !important;
+  background-color: transparent !important;
+  border: 1px solid transparent !important;
+  color: #cbd5e1 !important;
+  font-weight: 500 !important;
+  padding: 0.55rem 0.75rem !important;
+  transition: all 0.15s !important;
+}
+.nav-btn-chat button:hover, .nav-btn-reports button:hover, .nav-btn-docs button:hover {
+  background-color: rgba(255, 255, 255, 0.02) !important;
+  color: #f8fafc !important;
+  border-color: var(--border) !important;
+}
+.nav-btn-chat.active button, .nav-btn-reports.active button, .nav-btn-docs.active button {
+  color: var(--accent) !important;
+  background-color: var(--accent-glow) !important;
+  border-color: var(--accent) !important;
+  font-weight: 600 !important;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -1054,32 +1080,24 @@ def render_sidebar():
         )
 
         # Navigation menu
-        st.markdown(
-            """
-            <div class="nav-heading">MAIN</div>
-            <div class="nav-item active">
-              <span class="nav-icon">💬</span> Chat
-            </div>
-            <div class="nav-item">
-              <span class="nav-icon">📤</span> Upload & Analyze
-            </div>
-            <div class="nav-item">
-              <span class="nav-icon">🕒</span> History
-            </div>
-            <div class="nav-item">
-              <span class="nav-icon">📊</span> Reports
-            </div>
+        st.markdown("<div class='nav-heading'>NAVIGATION</div>", unsafe_allow_html=True)
+        active_tab = st.session_state.get("active_tab", "Chat")
 
-            <div class="nav-heading">RESOURCES</div>
-            <div class="nav-item">
-              <span class="nav-icon">📖</span> Documentation
-            </div>
-            <div class="nav-item">
-              <span class="nav-icon">🛡️</span> Best Practices
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
+        st.markdown(f"<div class='nav-btn-chat{' active' if active_tab == 'Chat' else ''}'>", unsafe_allow_html=True)
+        if st.button("💬 Chat Workspace", key="sidebar_nav_chat", use_container_width=True):
+            st.session_state.active_tab = "Chat"
+            st.rerun()
+        st.markdown("</div>", unsafe_allow_html=True)
+
+        st.markdown(f"<div class='nav-btn-reports{' active' if active_tab == 'Reports' else ''}'>", unsafe_allow_html=True)
+        if st.button("📊 Analytics Dashboard", key="sidebar_nav_reports", use_container_width=True):
+            st.session_state.active_tab = "Reports"
+            st.rerun()
+
+        st.markdown(f"<div class='nav-btn-docs{' active' if active_tab == 'Docs' else ''}'>", unsafe_allow_html=True)
+        if st.button("📖 Documentation Library", key="sidebar_nav_docs", use_container_width=True):
+            st.session_state.active_tab = "Docs"
+            st.rerun()
 
         # Export findings button
         active_chat = get_active_chat()
@@ -1125,6 +1143,7 @@ def render_sidebar():
 # ── Init ──────────────────────────────────────────────────────────────────────
 def init_state():
     if "uploader_key" not in st.session_state: st.session_state.uploader_key = 0
+    if "active_tab" not in st.session_state: st.session_state.active_tab = "Chat"
     if "chats" not in st.session_state:
         st.session_state.chats = [{
             "id": 1,
@@ -1154,6 +1173,40 @@ active_chat = get_active_chat()
 
 # Reserve header & stats container at the top of the page
 top_container = st.container()
+
+active_tab = st.session_state.get("active_tab", "Chat")
+
+if active_tab == "Reports":
+    with top_container:
+        user_email = st.session_state.get('user_email') or 'krishan@example.com'
+        first_name = get_user_name_from_email(user_email).split(' ')[0]
+        st.markdown(
+            f"""
+            <div class="welcome-text-group">
+              <h1 class="welcome-title">📊 Analytics Dashboard</h1>
+              <p class="welcome-subtitle">Security Metrics and Audit Reports for {first_name}</p>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+    st.info("Performance stats and compliance reports will render here in real-time.")
+    st.stop()
+
+if active_tab == "Docs":
+    with top_container:
+        user_email = st.session_state.get('user_email') or 'krishan@example.com'
+        first_name = get_user_name_from_email(user_email).split(' ')[0]
+        st.markdown(
+            f"""
+            <div class="welcome-text-group">
+              <h1 class="welcome-title">📖 Documentation Library</h1>
+              <p class="welcome-subtitle">Authoritative Playbooks and CIS Guidelines for {first_name}</p>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+    st.info("Authoritative CIS benchmarks and security containment guides will load here.")
+    st.stop()
 
 # Split main workspace into Left Column (File upload/details) and Right Column (Welcome / Chat)
 main_col_left, main_col_right = st.columns([1.2, 1.8], gap="large")
